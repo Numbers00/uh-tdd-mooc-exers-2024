@@ -84,7 +84,6 @@ function createApp(database: Database) {
     const holidays = database.getHolidays();
     for (let row of holidays) {
       let holiday = new Date(row.holiday);
-      let date2 = date;
       let holiday2 = convert(holiday);
       if (
         date &&
