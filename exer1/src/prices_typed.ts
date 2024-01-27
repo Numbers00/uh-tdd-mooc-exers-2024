@@ -1,5 +1,4 @@
 import "./polyfills";
-import { Temporal } from "@js-temporal/polyfill";
 import express from "express";
 import { Database } from "./database";
 
@@ -25,13 +24,13 @@ function createApp(database: Database) {
     res.json({ cost });
   });
 
-  function parseDate(dateString: string | undefined): Temporal.PlainDate | undefined {
+  function parseDate(dateString: string | undefined): Date | undefined {
     if (dateString) {
-      return Temporal.PlainDate.from(dateString);
+      return new Date(dateString);
     }
   }
 
-  function calculateCost(age: number | undefined, type: string, date: Temporal.PlainDate | undefined, baseCost: number) {
+  function calculateCost(age: number | undefined, type: string, date: Date | undefined, baseCost: number) {
     if (type === "night") {
       return calculateCostForNightTicket(age, baseCost);
     } else {
@@ -52,7 +51,7 @@ function createApp(database: Database) {
     return baseCost;
   }
 
-  function calculateCostForDayTicket(age: number | undefined, date: Temporal.PlainDate | undefined, baseCost: number) {
+  function calculateCostForDayTicket(age: number | undefined, date: Date | undefined, baseCost: number) {
     let reduction = calculateReduction(date);
     if (age === undefined) {
       return Math.ceil(baseCost * (1 - reduction / 100));
@@ -69,7 +68,7 @@ function createApp(database: Database) {
     return Math.ceil(baseCost * (1 - reduction / 100));
   }
 
-  function calculateReduction(date: Temporal.PlainDate | undefined) {
+  function calculateReduction(date: Date | undefined) {
     let reduction = 0;
     if (date && isMonday(date) && !isHoliday(date)) {
       reduction = 35;
@@ -77,29 +76,24 @@ function createApp(database: Database) {
     return reduction;
   }
 
-  function isMonday(date: Temporal.PlainDate) {
-    return date.dayOfWeek === 1;
+  function isMonday(date: Date) {
+    return date.getDay() === 1;
   }
 
-  function isHoliday(date: Temporal.PlainDate | undefined) {
+  function isHoliday(date: Date | undefined) {
     const holidays = database.getHolidays();
     for (let row of holidays) {
       let holiday = new Date(row.holiday);
-      let holiday2 = convert(holiday);
       if (
         date &&
-        date.equals(holiday2)
+        date.getFullYear() === holiday.getFullYear() &&
+        date.getMonth() === holiday.getMonth() &&
+        date.getDate() === holiday.getDate()
       ) {
         return true;
       }
     }
     return false;
-  }
-
-  function convert(date: Date | undefined): Temporal.PlainDate | undefined {
-    if (!date) return;
-    // @ts-ignore
-    return date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate();
   }
 
   return app;
