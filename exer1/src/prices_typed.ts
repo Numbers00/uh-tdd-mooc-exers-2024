@@ -96,6 +96,8 @@ function createApp(database: Database) {
     return false;
   }
 
+  function convert(date: Date | undefined) {}
+
   return app;
 }
 
