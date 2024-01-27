@@ -78,7 +78,7 @@ function createApp(database: Database) {
   }
 
   function isMonday(date: Date) {
-    return date.getDay() === 1;
+    return convert(date)?.dayOfWeek === 1;
   }
 
   function isHoliday(date: Temporal.PlainDate | undefined) {
