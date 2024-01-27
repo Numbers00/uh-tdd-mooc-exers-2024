@@ -98,6 +98,8 @@ function createApp(database: Database) {
 
   function convert(date: Date | undefined) {
     if (!date) return;
+    // @ts-ignore
+    return date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate();
   }
 
   return app;
