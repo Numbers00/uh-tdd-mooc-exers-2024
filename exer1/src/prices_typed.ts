@@ -97,6 +97,7 @@ function createApp(database: Database) {
   }
 
   function convert(date: Date | undefined) {
+    if (!date) return;
   }
 
   return app;
