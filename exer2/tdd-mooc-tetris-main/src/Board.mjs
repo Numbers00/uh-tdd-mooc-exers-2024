@@ -12,12 +12,12 @@ export class Board {
     );
   }
 
-  toString() {
-    return this.boardState.map(row => row.join("")).join("\n") + "\n";
-  }
-
   drop(block) {
     const midPosition = Math.floor(this.width / 2);
     this.boardState[0][midPosition] = block;
+  }
+
+  toString() {
+    return this.boardState.map(row => row.join("")).join("\n") + "\n";
   }
 }
