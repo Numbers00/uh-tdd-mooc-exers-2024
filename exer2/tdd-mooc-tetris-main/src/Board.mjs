@@ -1,13 +1,18 @@
 export class Board {
   width;
   height;
+  boardState = [];
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
+    this.boardState = Array.from(
+      { length: height },
+      () => Array.from({ length: width }, () => ".")
+    );
   }
 
   toString() {
-    return `${".".repeat(this.width)}\n`.repeat(this.height);
+    return this.boardState.map(row => row.join("")).join("\n") + "\n";
   }
 }

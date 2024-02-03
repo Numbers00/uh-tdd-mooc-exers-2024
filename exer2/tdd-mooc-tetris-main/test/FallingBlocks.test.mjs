@@ -16,38 +16,36 @@ describe("Falling blocks", () => {
     );
   });
 
-  /*
-  describe("When a block is dropped", () => {
-    beforeEach(() => {
-      board.drop("X");
-    });
+  // describe("When a block is dropped", () => {
+  //   beforeEach(() => {
+  //     board.drop("X");
+  //   });
 
-    test("it starts from the top middle", () => {
-      expect(board.toString()).to.equalShape(
-        `.X.
-         ...
-         ...`
-      );
-    });
+  //   test("it starts from the top middle", () => {
+  //     expect(board.toString()).to.equalShape(
+  //       `.X.
+  //        ...
+  //        ...`
+  //     );
+  //   });
 
-    test.skip("it moves down one row per tick", () => {
-      board.tick();
+  //   test.skip("it moves down one row per tick", () => {
+  //     board.tick();
 
-      expect(board.toString()).to.equalShape(
-        `...
-         .X.
-         ...`
-      );
-    });
+  //     expect(board.toString()).to.equalShape(
+  //       `...
+  //        .X.
+  //        ...`
+  //     );
+  //   });
 
-    test.skip("at most one block may be falling at a time", () => {
-      const before = board.toString();
-      expect(() => board.drop("Y")).to.throw("already falling");
-      const after = board.toString();
-      expect(after).to.equal(before);
-    });
-  });
-  */
+  //   test.skip("at most one block may be falling at a time", () => {
+  //     const before = board.toString();
+  //     expect(() => board.drop("Y")).to.throw("already falling");
+  //     const after = board.toString();
+  //     expect(after).to.equal(before);
+  //   });
+  // });
 
   /*
   describe("When a block reaches the bottom", () => {
