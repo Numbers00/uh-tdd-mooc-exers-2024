@@ -2,7 +2,7 @@ export class Board {
   width;
   height;
   boardState = [];
-  newestShape = {
+  latestShape = {
     shape: "",
     xPos: -1,
     yPos: -1,
@@ -24,18 +24,18 @@ export class Board {
       throw new Error("already falling");
     }
     this.boardState[0][midPosition] = block;
-    this.newestShape = { shape: block, xPos: 0, yPos: midPosition, hasFallen: false }
+    this.latestShape = { shape: block, xPos: 0, yPos: midPosition, hasFallen: false }
   }
 
   hasFalling() {
-    return !this.newestShape.hasFallen;
+    return !this.latestShape.hasFallen;
   }
 
   tick() {
     let newBoardState = [...this.boardState];
 
     if (this.boardState[this.height - 1].some(e => e !== ".")) {
-      this.newestShape.hasFallen = true;
+      this.latestShape.hasFallen = true;
       return;
     }
 
