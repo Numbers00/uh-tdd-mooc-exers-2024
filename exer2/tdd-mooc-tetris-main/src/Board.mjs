@@ -36,7 +36,10 @@ export class Board {
   tick() {
     const latestShape = { ...this.latestShape }
 
-    if (this.boardState[this.height - 1].some(e => e !== ".")) {
+    if (
+      latestShape.yPos + 1 === this.height
+      || this.boardState[latestShape.yPos + 1][latestShape.xPos] !== "."
+    ) {
       this.latestShape.hasFallen = true;
       return;
     }
