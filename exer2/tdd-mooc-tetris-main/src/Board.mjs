@@ -34,22 +34,21 @@ export class Board {
   }
 
   tick() {
-    let newBoardState = [...this.boardState];
+    const latestShape = { ...this.latestShape }
 
     if (this.boardState[this.height - 1].some(e => e !== ".")) {
       this.latestShape.hasFallen = true;
       return;
     }
 
-    if (this.latestShape.yPos + 1 !== this.height && this.boardState[this.latestShape.yPos + 1][this.latestShape.xPos] === ".") {
-      newBoardState[this.latestShape.yPos + 1][this.latestShape.xPos] = this.latestShape.shape;
-      newBoardState[this.latestShape.yPos][this.latestShape.xPos] = ".";
-      this.latestShape.yPos += 1;
+    let newBoardState = [...this.boardState];
+    if (latestShape.yPos + 1 !== this.height && this.boardState[latestShape.yPos + 1][latestShape.xPos] === ".") {
+      newBoardState[latestShape.yPos + 1][latestShape.xPos] = latestShape.shape;
+      newBoardState[latestShape.yPos][latestShape.xPos] = ".";
+      latestShape.yPos += 1;
     }
 
-    // Traverse 2D array for board state from bottom up
-    // to move X blocks down if they're not already
-    // at the very bottom
+    this.latestShape = { ...latestShape };
 
     this.boardState = newBoardState;
   }
