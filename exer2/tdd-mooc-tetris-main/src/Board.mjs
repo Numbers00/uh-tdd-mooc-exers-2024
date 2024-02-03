@@ -14,6 +14,9 @@ export class Board {
 
   drop(block) {
     const midPosition = Math.floor(this.width / 2);
+    if (this.boardState[0][midPosition] !== ".") {
+      throw new Error("already falling");
+    }
     this.boardState[0][midPosition] = block;
   }
 
