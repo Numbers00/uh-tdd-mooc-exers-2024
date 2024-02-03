@@ -2,7 +2,12 @@ export class Board {
   width;
   height;
   boardState = [];
-  shapeHasFallen = false;
+  newestShape = {
+    shape: "",
+    xPos: -1,
+    yPos: -1,
+    hasFallen: false
+  }
 
   constructor(width, height) {
     this.width = width;
@@ -19,17 +24,18 @@ export class Board {
       throw new Error("already falling");
     }
     this.boardState[0][midPosition] = block;
+    this.newestShape = { shape: block, xPos: 0, yPos: midPosition, hasFallen: false }
   }
 
   hasFalling() {
-    return !this.shapeHasFallen;
+    return !this.newestShape.hasFallen;
   }
 
   tick() {
     let newBoardState = [...this.boardState];
 
     if (this.boardState[this.height - 1].some(e => e !== ".")) {
-      this.shapeHasFallen = true;
+      this.newestShape.hasFallen = true;
       return;
     }
 
