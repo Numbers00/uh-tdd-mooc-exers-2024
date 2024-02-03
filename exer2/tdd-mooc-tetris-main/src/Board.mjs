@@ -20,6 +20,10 @@ export class Board {
     this.boardState[0][midPosition] = block;
   }
 
+  hasFalling() {
+    return true;
+  }
+
   tick() {
     let newBoardState = [...this.boardState];
 
