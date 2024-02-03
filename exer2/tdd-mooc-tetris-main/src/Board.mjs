@@ -24,7 +24,9 @@ export class Board {
       throw new Error("already falling");
     }
     this.boardState[0][midPosition] = block;
-    this.latestShape = { shape: block, xPos: 0, yPos: midPosition, hasFallen: false }
+    this.latestShape = {
+      shape: block, xPos: midPosition, yPos: 0, hasFallen: false
+    }
   }
 
   hasFalling() {
@@ -39,18 +41,15 @@ export class Board {
       return;
     }
 
+    if (this.latestShape.yPos + 1 !== this.height && this.boardState[this.latestShape.yPos + 1][this.latestShape.xPos] === ".") {
+      newBoardState[this.latestShape.yPos + 1][this.latestShape.xPos] = this.latestShape.shape;
+      newBoardState[this.latestShape.yPos][this.latestShape.xPos] = ".";
+      this.latestShape.yPos += 1;
+    }
+
     // Traverse 2D array for board state from bottom up
     // to move X blocks down if they're not already
     // at the very bottom
-    for (let i = this.height - 2; i >= 0; i--) {
-      for (let j = 0; j < this.width; j++) {
-        const targetCell = this.boardState[i][j];
-        if (targetCell !== ".") {
-          newBoardState[i][j] = ".";
-          newBoardState[i+1][j] = targetCell;
-        }
-      }
-    }
 
     this.boardState = newBoardState;
   }
