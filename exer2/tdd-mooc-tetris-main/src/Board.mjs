@@ -18,12 +18,9 @@ export class Board {
   }
 
   tick() {
-    this.boardState[0][1] = ".";
-    this.boardState[1][1] = "X";
-
     let newBoardState = [...this.boardState];
 
-    for (let i = 0; i < this.height - 1; i++) {
+    for (let i = this.height - 2; i >= 0; i--) {
       for (let j = 0; j < this.width; j++) {
         if (this.boardState[i][j] === "X") {
           newBoardState[i][j] = ".";
@@ -31,6 +28,8 @@ export class Board {
         }
       }
     }
+
+    this.boardState = newBoardState;
   }
 
   toString() {
