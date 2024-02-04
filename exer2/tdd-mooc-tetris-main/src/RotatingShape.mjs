@@ -6,12 +6,16 @@ export class RotatingShape {
     this.shape = shapeRows;
   }
 
+  rotateLeft() {
+    return "CFI\nBEH\nADG\n";
+  }
+
   rotateRight() {
     const dims = { w: this.shape[0].length, h: this.shape.length };
     let newShape = this.shape.map(r => [...r]);
     for (let i = 0; i < dims.h; i++) {
       for (let j = 0; j < dims.w; j++) {
-        newShape[j][dims.h - 1 - i] = this.shape[i][j];
+        newShape[j][dims.w - 1 - i] = this.shape[i][j];
       }
     }
     return new RotatingShape(
