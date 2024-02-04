@@ -7,7 +7,16 @@ export class RotatingShape {
   }
 
   rotateLeft() {
-    return "CFI\nBEH\nADG\n";
+    const dims = { w: this.shape[0].length, h: this.shape.length };
+    let newShape = this.shape.map(r => [...r]);
+    for (let i = 0; i < dims.h; i++) {
+      for (let j = 0; j < dims.w; j++) {
+        newShape[dims.h - 1 - j][i] = this.shape[i][j];
+      }
+    }
+    return new RotatingShape(
+      newShape.map(r => r.join("")).join("\n")
+    )
   }
 
   rotateRight() {
