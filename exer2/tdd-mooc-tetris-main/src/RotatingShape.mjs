@@ -1,9 +1,15 @@
 export class RotatingShape {
   shape = [[]];
+  currOrientation = 0;
+  maxOrientations = 4;
+  orientations = [];
 
-  constructor(shape) {
+  constructor(shape, currOrientation=0, maxOrientations=4, orientations=[]) {
     let shapeRows = shape.split("\n").map(r => r.trim().split(""));
     this.shape = shapeRows;
+    this.currOrientation = currOrientation;
+    this.maxOrientations = maxOrientations;
+    this.orientations = orientations;
   }
 
   rotateLeft() {
@@ -15,8 +21,9 @@ export class RotatingShape {
        .....`
     );
     if (this.shape.toString() === I_SHAPE.shape.toString()) {
-      return this.rotateRight()
+      return this.rotateRight();
     }
+
     const dims = { w: this.shape[0].length, h: this.shape.length };
     let newShape = this.shape.map(r => [...r]);
     for (let i = 0; i < dims.h; i++) {
