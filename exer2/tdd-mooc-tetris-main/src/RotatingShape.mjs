@@ -7,6 +7,16 @@ export class RotatingShape {
   }
 
   rotateLeft() {
+    const I_SHAPE = new RotatingShape(
+      `.....
+       .....
+       IIII.
+       .....
+       .....`
+    );
+    if (this.shape.toString() === I_SHAPE.shape.toString()) {
+      return this.rotateRight()
+    }
     const dims = { w: this.shape[0].length, h: this.shape.length };
     let newShape = this.shape.map(r => [...r]);
     for (let i = 0; i < dims.h; i++) {
