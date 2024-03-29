@@ -45,11 +45,9 @@ export class Board {
     }
 
     let newBoardState = this.boardState.map(r => [...r]);
-    if (latestShape.yPos + 1 !== this.height && this.boardState[latestShape.yPos + 1][latestShape.xPos] === ".") {
-      newBoardState[latestShape.yPos + 1][latestShape.xPos] = latestShape.shape;
-      newBoardState[latestShape.yPos][latestShape.xPos] = ".";
-      latestShape.yPos += 1;
-    }
+    newBoardState[latestShape.yPos + 1][latestShape.xPos] = latestShape.shape;
+    newBoardState[latestShape.yPos][latestShape.xPos] = ".";
+    latestShape.yPos += 1;
 
     this.latestShape = { ...latestShape };
 
