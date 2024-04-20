@@ -46,6 +46,16 @@ export class RotatingShape {
   }
 
   rotateRight() {
+    const I_SHAPE = new RotatingShape(
+      `..I..
+       ..I..
+       ..I..
+       ..I..
+       .....`
+    );
+    if (this.shape.toString() === I_SHAPE.shape.toString())
+      return this.rotateLeft();
+
     const O_SHAPE = new RotatingShape(
       `.OO
        .OO
