@@ -112,7 +112,7 @@ describe("The O shape", () => {
     );
   });
 
-  test.skip("has 1 distinct orientations", () => {
+  test("has 1 distinct orientations", () => {
     expect(distinctOrientations(shape).size).to.equal(1);
   });
 });
