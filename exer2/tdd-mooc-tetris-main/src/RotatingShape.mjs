@@ -24,6 +24,15 @@ export class RotatingShape {
       return this.rotateRight();
     }
 
+    const O_SHAPE = new RotatingShape(
+      `.OO
+       .OO
+       ...`
+    );
+    if (this.shape.toString() === O_SHAPE.shape.toString()) {
+      return this;
+    }
+
     const dims = { w: this.shape[0].length, h: this.shape.length };
     let newShape = this.shape.map(r => [...r]);
     for (let i = 0; i < dims.h; i++) {
