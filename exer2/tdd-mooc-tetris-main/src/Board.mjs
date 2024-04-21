@@ -34,6 +34,10 @@ export class Board {
     return false;
   }
 
+  _checkNewLatestEntityWillExceedBoardWidth(newLatestEntity) {
+    return newLatestEntity.xPos.some(v => v < 0 || v >= this.width);
+  }
+
   dropBlock(block) {
     const midPosition = Math.floor(this.width / 2);
     if (this.boardState[0][midPosition] !== ".") {
