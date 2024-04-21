@@ -252,10 +252,19 @@ export class Board {
     ) return;
 
     const newBoardState = this.boardState.map(r => [...r]);
+    // Overwrite coordinates with the new tetromino
+    for (let i = 0; i < newLatestEntity.shape.length; i++) {
+      for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
+        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[j]] = newLatestEntity.shape[i][j];
+      }
+    }
 
     if (
       this._checkNewBoardWillOverlap(newBoardState, newLatestEntity)
     ) return;
+
+    this.latestEntity = { ...newLatestEntity };
+    this.boardState = newBoardState;
   }
 
   tick() {
