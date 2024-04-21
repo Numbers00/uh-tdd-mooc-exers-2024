@@ -36,6 +36,16 @@ export class Board {
     const midPositions = Array
       .from({length: dims.w}, (_, i) => i)
       .map(v => v + midPosition - Math.floor(dims.w / 2));
+
+    for (let i = 0; i < dims.h; i++) {
+      if (
+        this.boardState[0]
+        // Gets the row of the new tetromino currently being iterated on
+        .slice(midPositions[0], midPositions[dims.w - 1] + 1)
+        .some(v => v !== ".")
+      )
+        throw new Error("already falling");
+    }
   }
 
   drop(entity) {
