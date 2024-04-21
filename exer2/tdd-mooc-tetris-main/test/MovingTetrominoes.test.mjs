@@ -15,6 +15,17 @@ function moveToEdgeLeft(board) {
   }
 }
 
+function moveToEdgeRight(board) {
+  let counter = 0
+  while (
+    board.boardState.map(row => row[board.width - 1]).every(cell => cell === ".")
+    && counter < board.width
+  ) {
+    board.moveEntityRight();
+    counter++;
+  }
+}
+
 describe("Falling tetrominoes", () => {
   let board;
   let shape = Tetromino.T_SHAPE;
@@ -60,7 +71,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("cannot be moved right beyond the board", () => {
+  test("cannot be moved right beyond the board", () => {
     moveToEdgeRight(board);
     expect(board.toString()).to.equalShape(
       `........T.
