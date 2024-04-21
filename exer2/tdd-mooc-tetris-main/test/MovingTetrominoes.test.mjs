@@ -24,4 +24,16 @@ describe("Falling tetrominoes", () => {
        ..........`
     );
   })
+
+  test.skip("can be moved right", () => {
+    board.moveEntityRight();
+    expect(board.toString()).to.equalShape(
+      `.....T....
+       ....TTT...
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  })
 });
