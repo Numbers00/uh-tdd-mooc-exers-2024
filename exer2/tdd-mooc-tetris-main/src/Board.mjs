@@ -238,6 +238,16 @@ export class Board {
     if (this.latestEntity.tetromino === null) return;
 
     const tetrominoRotatedRight = this.latestEntity.tetromino.rotateRight();
+    const newLatestEntity = {
+      ...this.latestEntity,
+      tetromino: tetrominoRotatedRight,
+      shape: tetrominoRotatedRight.shape,
+      yPos: Array
+        .from({ length: tetrominoRotatedRight.shape.length }, (_, i) => i)
+        .filter(v => tetrominoRotatedRight.shape[v].some(v => v !== ".")),
+    };
+
+    if (this._checkNewLatestEntityWillExceedBoardWidth(newLatestEntity)) return;
   }
 
   tick() {
