@@ -18,6 +18,10 @@ export class Board {
     );
   }
 
+  getMidElem(arr) {
+    return arr[Math.floor(arr.length / 2)];
+  }
+
   dropBlock(block) {
     const midPosition = Math.floor(this.width / 2);
     if (this.boardState[0][midPosition] !== ".") {
