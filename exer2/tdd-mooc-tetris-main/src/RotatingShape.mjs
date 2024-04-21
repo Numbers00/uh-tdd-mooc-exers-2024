@@ -61,12 +61,7 @@ export class RotatingShape {
     if (this.shape.toString() === I_SHAPE.shape.toString())
       return this.rotateLeft();
 
-    const O_SHAPE = new RotatingShape(
-      `.OO
-       .OO
-       ...`
-    );
-    if (this.shape.toString() === O_SHAPE.shape.toString()) {
+    if (this.toString() === RotatingShape.O_SHAPE_ORIENTATIONS[0].toString()) {
       return this;
     }
 
