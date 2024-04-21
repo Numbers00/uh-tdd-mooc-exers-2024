@@ -57,7 +57,7 @@ export class Board {
     }
     this.boardState[0][midPosition] = block;
     this.latestEntity = {
-      ...this.latestEntity,
+      tetromino: null,
       shape: [[block]],
       dims: { w: 1, h: 1 },
       allPos: {
@@ -112,6 +112,15 @@ export class Board {
       tetromino: tetromino,
       shape: tetromino.shape,
       dims: dims,
+      allPos: {
+        x: targetXPositions,
+        y: Array
+          .from({ length: dims.h }, (_, i) => i),
+      },
+      occupiedPos: {
+        x: xPositions,
+        y: Array.from({ length: dims.h }, (_, i) => i).filter(v => tetromino.shape[v].some(v => v !== ".")),
+      },
       xPos: xPositions,
       yPos: Array
         .from({ length: dims.h }, (_, i) => i)
