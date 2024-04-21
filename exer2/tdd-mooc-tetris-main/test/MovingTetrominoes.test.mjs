@@ -110,7 +110,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("cannot be moved right through other blocks", () => {
+  test("cannot be moved right through other blocks", () => {
     moveToEdgeRight(board);
 
     board.drop(shape);

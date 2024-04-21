@@ -115,7 +115,12 @@ export class Board {
   moveEntityRight() {
     const latestEntity = { ...this.latestEntity };
 
-    if (latestEntity.xPos.at(-1) === this.width - 1) return;
+    for (let i = 0; i < latestEntity.yPos.length; i++) {
+      if (
+        latestEntity.xPos.at(-1) + 1 === this.width
+        || this.boardState[latestEntity.yPos[i]][latestEntity.xPos.at(-1) + 1] !== "."
+      ) return;
+    }
 
     let newBoardState = this.boardState.map(r => [...r]);
     // Move the entity right by one column
