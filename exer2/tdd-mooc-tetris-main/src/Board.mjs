@@ -18,8 +18,8 @@ export class Board {
     );
   }
 
-  getMidIdx(arr) {
-    return Math.floor(arr.length / 2);
+  getMidElem(arr) {
+    return arr[Math.floor(arr.length / 2)];
   }
 
   dropBlock(block) {
