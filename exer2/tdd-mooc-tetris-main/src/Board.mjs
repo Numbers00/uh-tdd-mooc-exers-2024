@@ -149,27 +149,27 @@ export class Board {
   }
 
   moveEntityRight() {
-    const latestEntity = { ...this.latestEntity };
+    const newLatestEntity = { ...this.latestEntity };
 
-    for (let i = 0; i < latestEntity.yPos.length; i++) {
+    for (let i = 0; i < newLatestEntity.yPos.length; i++) {
       if (
-        latestEntity.xPos.at(-1) + 1 === this.width
-        || this.boardState[latestEntity.yPos[i]][latestEntity.xPos.at(-1) + 1] !== "."
+        newLatestEntity.xPos.at(-1) + 1 === this.width
+        || this.boardState[newLatestEntity.yPos[i]][newLatestEntity.xPos.at(-1) + 1] !== "."
       ) return;
     }
 
     let newBoardState = this.boardState.map(r => [...r]);
     // Move the entity right by one column
-    for (let i = 0; i < latestEntity.shape.length; i++) {
-      for (let j = latestEntity.shape[0].length - 1; j >= 0; j--) {
-        if (latestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
-        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j] + 1] = latestEntity.shape[i][j];
-        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
+    for (let i = 0; i < newLatestEntity.shape.length; i++) {
+      for (let j = newLatestEntity.shape[0].length - 1; j >= 0; j--) {
+        if (newLatestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
+        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[j] + 1] = newLatestEntity.shape[i][j];
+        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[j]] = ".";
       }
     }
-    latestEntity.xPos = latestEntity.xPos.map(v => v + 1);
+    newLatestEntity.xPos = newLatestEntity.xPos.map(v => v + 1);
 
-    this.latestEntity = { ...latestEntity };
+    this.latestEntity = { ...newLatestEntity };
 
     this.boardState = newBoardState;
   }
