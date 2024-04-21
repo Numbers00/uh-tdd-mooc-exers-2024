@@ -1,7 +1,8 @@
-import { beforeEach, describe } from "vitest";
+import { expect } from "chai";
+import { beforeEach, describe, test } from "vitest";
+
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
-
 
 describe("Falling tetrominoes", () => {
   let board;
@@ -11,4 +12,16 @@ describe("Falling tetrominoes", () => {
     board = new Board(10, 6);
     board.drop(shape);
   });
+
+  test.skip("can be rotated left", () => {
+    board.rotateEntityLeft();
+    expect(board.toString()).to.equalShape(
+      `....T.....
+       ...TT.....
+       ....T.....
+       ..........
+       ..........
+       ..........`
+    ); 
+  })
 });
