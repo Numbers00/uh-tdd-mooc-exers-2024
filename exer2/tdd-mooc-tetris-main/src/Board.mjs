@@ -18,6 +18,14 @@ export class Board {
     );
   }
 
+  dropBlock(block) {
+    const midPosition = Math.floor(this.width / 2);
+    if (this.boardState[0][midPosition] !== ".")
+      throw new Error("already falling");
+    this.boardState[0][midPosition] = block;
+    this.latestShape = { shape: block, xPos: midPosition, yPos: 0, hasFallen: false };
+  }
+
   drop(shape) {
     switch (typeof shape) {
     case "string":
