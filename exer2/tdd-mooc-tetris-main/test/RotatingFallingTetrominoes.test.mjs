@@ -24,4 +24,16 @@ describe("Falling tetrominoes", () => {
        ..........`
     );
   })
+
+  test.skip("can be rotated right", () => {
+    board.rotateEntityRight();
+    expect(board.toString()).to.equalShape(
+      `....T.....
+       ....TT...
+       ....T.....
+       ..........
+       ..........
+       ..........`
+    );
+  })
 });
