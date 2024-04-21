@@ -1,6 +1,14 @@
 export class RotatingShape {
   shape = [[]];
 
+  I_SHAPE_ORIENTATIONS = [
+    `.....
+     .....
+     IIII.
+     .....
+     .....`,
+  ];
+
   constructor(shape) {
     this.shape = shape.split("\n").map(r => r.trim().split(""));
   }
