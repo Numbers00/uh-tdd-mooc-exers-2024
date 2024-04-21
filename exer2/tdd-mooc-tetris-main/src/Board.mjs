@@ -174,6 +174,15 @@ export class Board {
     this.boardState = newBoardState;
   }
 
+  rotateEntityLeft() {
+    const latestEntity = { ...this.latestEntity };
+  
+    if (latestEntity.tetromino === null) return;
+
+    latestEntity.tetromino.rotateLeft();
+    latestEntity.shape = latestEntity.tetromino.shape;
+  }
+
   tick() {
     this.moveEntityDown();
   }
