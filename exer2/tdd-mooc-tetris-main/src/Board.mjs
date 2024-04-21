@@ -24,11 +24,12 @@ export class Board {
     return arr[Math.floor(arr.length / 2)];
   }
 
-  _checkNewBoardWillOverlap(newBoardState) {
+  _checkNewBoardWillOverlap(newBoardState, newLatestEntity) {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
-        if (this.boardState[i][j] !== "." && newBoardState[i][j] !== ".")
-          return true;
+        if (
+          this.boardState[i][j] !== "." && newBoardState[i][j] !== "." && !newLatestEntity.yPos.includes(i) && !newLatestEntity.xPos.includes(j)
+        ) return true;
       }
     }
     return false;
@@ -221,6 +222,11 @@ export class Board {
         newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = latestEntity.shape[i][j];
       }
     }
+
+    if (
+      this._checkNewBoardWillOverlap(newBoardState, latestEntity)
+    ) return;
+
     this.latestEntity = { ...latestEntity };
     this.boardState = newBoardState;
   }
