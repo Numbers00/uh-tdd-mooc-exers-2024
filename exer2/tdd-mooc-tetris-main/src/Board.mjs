@@ -107,6 +107,12 @@ export class Board {
     this.boardState = newBoardState;
   }
 
+  moveEntityRight() {
+    const latestEntity = { ...this.latestEntity };
+
+    if (latestEntity.xPos.at(-1) === this.width - 1) return;
+  }
+
   tick() {
     const latestEntity = { ...this.latestEntity };
 
