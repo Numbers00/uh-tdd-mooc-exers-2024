@@ -175,12 +175,17 @@ export class Board {
   }
 
   rotateEntityLeft() {
-    const latestEntity = { ...this.latestEntity };
-  
-    if (latestEntity.tetromino === null) return;
+    if (this.latestEntity.tetromino === null) return;
 
-    latestEntity.tetromino.rotateLeft();
-    latestEntity.shape = latestEntity.tetromino.shape;
+    const tetrominoRotatedLeft = this.latestEntity.tetromino.rotateLeft();
+    const latestEntity = {
+      ...this.latestEntity,
+      tetromino: tetrominoRotatedLeft,
+      shape: tetrominoRotatedLeft.shape,
+      yPos: Array
+        .from({ length: tetrominoRotatedLeft.shape.length }, (_, i) => i)
+        .filter(v => tetrominoRotatedLeft.shape[v].some(v => v !== ".")),
+    };
   }
 
   tick() {
