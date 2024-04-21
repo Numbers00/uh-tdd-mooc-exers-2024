@@ -2,10 +2,10 @@ export class Board {
   width;
   height;
   boardState = [];
-  latestShape = {
-    shape: "",
-    xPos: -1,
-    yPos: -1,
+  latestEntity = {
+    shape: [[]],
+    xPos: [-1],
+    yPos: [-1],
     hasFallen: false
   }
 
@@ -18,38 +18,97 @@ export class Board {
     );
   }
 
-  drop(block) {
+  getMidElem(arr) {
+    return arr[Math.floor(arr.length / 2)];
+  }
+
+  dropBlock(block) {
     const midPosition = Math.floor(this.width / 2);
     if (this.boardState[0][midPosition] !== ".") {
       throw new Error("already falling");
     }
     this.boardState[0][midPosition] = block;
-    this.latestShape = {
-      shape: block, xPos: midPosition, yPos: 0, hasFallen: false
+    this.latestEntity = {
+      shape: [[block]], xPos: [midPosition], yPos: [0], hasFallen: false
+    };
+  }
+
+  dropTetromino(tetromino) {
+    const dims = { w: tetromino.shape[0].length, h: tetromino.shape.length };
+
+    const midPosition = Math.floor(this.width / 2);
+    const xPositions = Array
+      .from({length: dims.w}, (_, i) => i)
+      .map(v => v + midPosition - Math.floor(dims.w / 2))
+      // this.width % 2 means the board width is odd
+      .map(v => this.width % 2 ? v : v - 1);
+
+    for (let i = 0; i < dims.h; i++) {
+      if (
+        this.boardState[0]
+        // Gets the row of the new tetromino currently being iterated on
+        .slice(xPositions[0], xPositions[dims.w - 1] + 1)
+        .some(v => v !== ".")
+      )
+        throw new Error("already falling");
+    }
+
+    for (let i = 0; i < dims.h; i++) {
+      for (let j = 0; j < dims.w; j++) {
+        this.boardState[i][xPositions[j]] = tetromino.shape[i][j];
+      }
+    }
+    this.latestEntity = {
+      shape: tetromino.shape,
+      xPos: xPositions,
+      yPos: Array
+        .from({ length: dims.h }, (_, i) => i)
+        .filter(v => tetromino.shape[v].some(v => v !== ".")),
+      hasFallen: false
+    };
+  }
+
+  drop(entity) {
+    switch (typeof entity) {
+    case "string":
+      this.dropBlock(entity);
+      break;
+    case "object":
+      if (entity.shape) this.dropTetromino(entity);
+      else throw new Error("unknown dropped entity");
+      break;
+    default:
+      throw new Error("unknown dropped entity");
     }
   }
 
   hasFalling() {
-    return !this.latestShape.hasFallen;
+    return !this.latestEntity.hasFallen;
   }
 
   tick() {
-    const latestShape = { ...this.latestShape }
+    const latestEntity = { ...this.latestEntity };
 
     if (
-      latestShape.yPos + 1 === this.height
-      || this.boardState[latestShape.yPos + 1][latestShape.xPos] !== "."
+      latestEntity.yPos.at(-1) + 1 === this.height
+      || this.boardState[latestEntity.yPos.at(-1) + 1][this.getMidElem(latestEntity.xPos)] !== "."
     ) {
-      this.latestShape.hasFallen = true;
+      this.latestEntity.hasFallen = true;
       return;
     }
 
     let newBoardState = this.boardState.map(r => [...r]);
-    newBoardState[latestShape.yPos + 1][latestShape.xPos] = latestShape.shape;
-    newBoardState[latestShape.yPos][latestShape.xPos] = ".";
-    latestShape.yPos += 1;
+    // Move the entity down by one row
+    for (let i = latestEntity.shape.length - 1; i >= 0; i--) {
+      for (let j = 0; j < latestEntity.shape[0].length; j++) {
+        if (latestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
+        newBoardState[latestEntity.yPos[i] + 1][latestEntity.xPos[j]] = latestEntity.shape[i][j];
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
+      }
+    }
+    latestEntity.yPos = latestEntity.yPos.map(v => v + 1);
 
-    this.latestShape = { ...latestShape };
+    this.latestEntity = { ...latestEntity };
 
     this.boardState = newBoardState;
   }
