@@ -83,15 +83,15 @@ export class Board {
 
     if (
       latestTetromino.yPos + 1 === this.height
-      || this.boardState[latestTetromino.yPos + 1][latestTetromino.xPos[0]] !== "."
+      || this.boardState[latestTetromino.yPos + 1][this.getMidElem(latestTetromino.xPos)] !== "."
     ) {
       this.latestTetromino.hasFallen = true;
       return;
     }
 
     let newBoardState = this.boardState.map(r => [...r]);
-    newBoardState[latestTetromino.yPos + 1][latestTetromino.xPos[0]] = latestTetromino.shape;
-    newBoardState[latestTetromino.yPos][latestTetromino.xPos[0]] = ".";
+    newBoardState[latestTetromino.yPos + 1][this.getMidElem(latestTetromino.xPos)] = latestTetromino.shape;
+    newBoardState[latestTetromino.yPos][this.getMidElem(latestTetromino.xPos)] = ".";
     latestTetromino.yPos += 1;
 
     this.latestTetromino = { ...latestTetromino };
