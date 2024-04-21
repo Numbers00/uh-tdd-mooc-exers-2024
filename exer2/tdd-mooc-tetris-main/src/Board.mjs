@@ -4,7 +4,7 @@ export class Board {
   boardState = [];
   latestTetromino = {
     shape: "",
-    xPos: -1,
+    xPos: [-1],
     yPos: -1,
     hasFallen: false
   }
@@ -25,7 +25,7 @@ export class Board {
     }
     this.boardState[0][midPosition] = block;
     this.latestTetromino = {
-      shape: block, xPos: midPosition, yPos: 0, hasFallen: false
+      shape: block, xPos: [midPosition], yPos: 0, hasFallen: false
     };
   }
 
@@ -79,15 +79,15 @@ export class Board {
 
     if (
       latestTetromino.yPos + 1 === this.height
-      || this.boardState[latestTetromino.yPos + 1][latestTetromino.xPos] !== "."
+      || this.boardState[latestTetromino.yPos + 1][latestTetromino.xPos[0]] !== "."
     ) {
       this.latestTetromino.hasFallen = true;
       return;
     }
 
     let newBoardState = this.boardState.map(r => [...r]);
-    newBoardState[latestTetromino.yPos + 1][latestTetromino.xPos] = latestTetromino.shape;
-    newBoardState[latestTetromino.yPos][latestTetromino.xPos] = ".";
+    newBoardState[latestTetromino.yPos + 1][latestTetromino.xPos[0]] = latestTetromino.shape;
+    newBoardState[latestTetromino.yPos][latestTetromino.xPos[0]] = ".";
     latestTetromino.yPos += 1;
 
     this.latestTetromino = { ...latestTetromino };
