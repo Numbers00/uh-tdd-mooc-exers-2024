@@ -86,6 +86,12 @@ export class Board {
     return !this.latestEntity.hasFallen;
   }
 
+  moveEntityLeft() {
+    const latestEntity = { ...this.latestEntity };
+
+    if (latestEntity.xPos[0] === 0) return;
+  }
+
   tick() {
     const latestEntity = { ...this.latestEntity };
 

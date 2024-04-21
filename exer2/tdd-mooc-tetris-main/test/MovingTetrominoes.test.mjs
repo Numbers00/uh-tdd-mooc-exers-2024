@@ -14,7 +14,7 @@ describe("Falling tetrominoes", () => {
   });
 
   test.skip("can be moved left", () => {
-    shape.moveLeft();
+    board.moveEntityLeft();
     expect(board.toString()).to.equalShape(
       `...T......
        ..TTT.....
