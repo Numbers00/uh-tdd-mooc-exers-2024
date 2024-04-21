@@ -128,7 +128,7 @@ export class Board {
     this.boardState = newBoardState;
   }
 
-  tick() {
+  moveEntityDown() {
     const latestEntity = { ...this.latestEntity };
 
     if (
@@ -153,6 +153,10 @@ export class Board {
     this.latestEntity = { ...latestEntity };
 
     this.boardState = newBoardState;
+  }
+
+  tick() {
+    this.moveEntityDown();
   }
 
   toString() {
