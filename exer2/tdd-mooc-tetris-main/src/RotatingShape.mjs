@@ -1,28 +1,40 @@
 export class RotatingShape {
   shape = [[]];
 
-  constructor(shape) {
-    this.shape = shape.split("\n").map(r => r.trim().split(""));
-  }
-
-  rotateLeft() {
-    const I_SHAPE = new RotatingShape(
+  static I_SHAPE_ORIENTATIONS = [
+    new RotatingShape(
       `.....
        .....
        IIII.
        .....
        .....`
-    );
-    if (this.shape.toString() === I_SHAPE.shape.toString()) {
-      return this.rotateRight();
-    }
-
-    const O_SHAPE = new RotatingShape(
+    ),
+    new RotatingShape(
+      `..I..
+       ..I..
+       ..I..
+       ..I..
+       .....`
+    )
+  ];
+  static O_SHAPE_ORIENTATIONS = [
+    new RotatingShape(
       `.OO
        .OO
        ...`
-    );
-    if (this.shape.toString() === O_SHAPE.shape.toString()) {
+    )
+  ]
+
+  constructor(shape) {
+    this.shape = shape.split("\n").map(r => r.trim().split(""));
+  }
+
+  rotateLeft() {
+    if (this.toString() === RotatingShape.I_SHAPE_ORIENTATIONS[0].toString()) {
+      return this.rotateRight();
+    }
+
+    if (this.toString() === RotatingShape.O_SHAPE_ORIENTATIONS[0].toString()) {
       return this;
     }
 
@@ -39,24 +51,11 @@ export class RotatingShape {
   }
 
   rotateRight() {
-    const I_SHAPE = new RotatingShape(
-      `..I..
-       ..I..
-       ..I..
-       ..I..
-       .....`
-    );
-    if (this.shape.toString() === I_SHAPE.shape.toString())
+    if (this.toString() === RotatingShape.I_SHAPE_ORIENTATIONS[1].toString())
       return this.rotateLeft();
 
-    const O_SHAPE = new RotatingShape(
-      `.OO
-       .OO
-       ...`
-    );
-    if (this.shape.toString() === O_SHAPE.shape.toString()) {
+    if (this.toString() === RotatingShape.O_SHAPE_ORIENTATIONS[0].toString())
       return this;
-    }
 
     const dims = { w: this.shape[0].length, h: this.shape.length };
     let newShape = this.shape.map(r => [...r]);

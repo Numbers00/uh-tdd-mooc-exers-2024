@@ -86,7 +86,59 @@ export class Board {
     return !this.latestEntity.hasFallen;
   }
 
-  tick() {
+  moveEntityLeft() {
+    const latestEntity = { ...this.latestEntity };
+
+    for (let i = 0; i < latestEntity.yPos.length; i++) {
+      if (
+        latestEntity.xPos[0] === 0
+        || this.boardState[latestEntity.yPos[i]][latestEntity.xPos[0] - 1] !== "."
+      ) return;
+    }
+
+    let newBoardState = this.boardState.map(r => [...r]);
+    // Move the entity left by one column
+    for (let i = 0; i < latestEntity.shape.length; i++) {
+      for (let j = 0; j < latestEntity.shape[0].length; j++) {
+        if (latestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j] - 1] = latestEntity.shape[i][j];
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
+      }
+    }
+    latestEntity.xPos = latestEntity.xPos.map(v => v - 1);
+
+    this.latestEntity = { ...latestEntity };
+
+    this.boardState = newBoardState;
+  }
+
+  moveEntityRight() {
+    const latestEntity = { ...this.latestEntity };
+
+    for (let i = 0; i < latestEntity.yPos.length; i++) {
+      if (
+        latestEntity.xPos.at(-1) + 1 === this.width
+        || this.boardState[latestEntity.yPos[i]][latestEntity.xPos.at(-1) + 1] !== "."
+      ) return;
+    }
+
+    let newBoardState = this.boardState.map(r => [...r]);
+    // Move the entity right by one column
+    for (let i = 0; i < latestEntity.shape.length; i++) {
+      for (let j = latestEntity.shape[0].length - 1; j >= 0; j--) {
+        if (latestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j] + 1] = latestEntity.shape[i][j];
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
+      }
+    }
+    latestEntity.xPos = latestEntity.xPos.map(v => v + 1);
+
+    this.latestEntity = { ...latestEntity };
+
+    this.boardState = newBoardState;
+  }
+
+  moveEntityDown() {
     const latestEntity = { ...this.latestEntity };
 
     if (
@@ -111,6 +163,10 @@ export class Board {
     this.latestEntity = { ...latestEntity };
 
     this.boardState = newBoardState;
+  }
+
+  tick() {
+    this.moveEntityDown();
   }
 
   toString() {
