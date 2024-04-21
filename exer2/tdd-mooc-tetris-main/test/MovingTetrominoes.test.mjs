@@ -5,7 +5,7 @@ import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
 function moveToEdgeLeft(board) {
-  let counter = 0
+  let counter = 0;
   while (
     board.boardState.map(row => row[0]).every(cell => cell === ".")
     && counter < board.width
@@ -16,12 +16,23 @@ function moveToEdgeLeft(board) {
 }
 
 function moveToEdgeRight(board) {
-  let counter = 0
+  let counter = 0;
   while (
     board.boardState.map(row => row[board.width - 1]).every(cell => cell === ".")
     && counter < board.width
   ) {
     board.moveEntityRight();
+    counter++;
+  }
+}
+
+function fallToBottom(board) {
+  let counter = 0;
+  while (
+    board.boardState.at(-1).every(cell => cell === ".")
+    && counter < board.width
+  ) {
+    board.moveEntityDown();
     counter++;
   }
 }
@@ -97,7 +108,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("cannot be moved down beyond the board", () => {
+  test("cannot be moved down beyond the board", () => {
     fallToBottom(board);
     board.moveEntityDown();
     expect(board.toString()).to.equalShape(
