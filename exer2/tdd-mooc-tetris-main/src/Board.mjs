@@ -28,7 +28,8 @@ export class Board {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
         if (
-          this.boardState[i][j] !== "." && newBoardState[i][j] !== "."
+          this.boardState[i][j] !== "."
+          && newBoardState[i][j] !== "."
           && !newLatestEntity.yPos.includes(i)
           && !newLatestEntity.xPos.includes(j)
         ) return true;
@@ -174,11 +175,11 @@ export class Board {
   }
 
   moveEntityDown() {
-    const latestEntity = { ...this.latestEntity };
+    const newLatestEntity = { ...this.latestEntity };
 
     if (
-      latestEntity.yPos.at(-1) + 1 === this.height
-      || this.boardState[latestEntity.yPos.at(-1) + 1][this._getMidElem(latestEntity.xPos)] !== "."
+      newLatestEntity.yPos.at(-1) + 1 === this.height
+      || this.boardState[newLatestEntity.yPos.at(-1) + 1][this._getMidElem(newLatestEntity.xPos)] !== "."
     ) {
       this.latestEntity.hasFallen = true;
       return;
@@ -186,16 +187,16 @@ export class Board {
 
     let newBoardState = this.boardState.map(r => [...r]);
     // Move the entity down by one row
-    for (let i = latestEntity.shape.length - 1; i >= 0; i--) {
-      for (let j = 0; j < latestEntity.shape[0].length; j++) {
-        if (latestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
-        newBoardState[latestEntity.yPos[i] + 1][latestEntity.xPos[j]] = latestEntity.shape[i][j];
-        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
+    for (let i = newLatestEntity.shape.length - 1; i >= 0; i--) {
+      for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
+        if (newLatestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
+        newBoardState[newLatestEntity.yPos[i] + 1][newLatestEntity.xPos[j]] = newLatestEntity.shape[i][j];
+        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[j]] = ".";
       }
     }
-    latestEntity.yPos = latestEntity.yPos.map(v => v + 1);
+    newLatestEntity.yPos = newLatestEntity.yPos.map(v => v + 1);
 
-    this.latestEntity = { ...latestEntity };
+    this.latestEntity = { ...newLatestEntity };
 
     this.boardState = newBoardState;
   }
