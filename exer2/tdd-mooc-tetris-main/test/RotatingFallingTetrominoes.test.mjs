@@ -4,6 +4,16 @@ import { beforeEach, describe, test } from "vitest";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
+function moveToEdgeLeft(board) {
+  let counter = 0;
+  while (
+    counter < board.width
+  ) {
+    board.moveEntityLeft();
+    counter++;
+  }
+}
+
 describe("Falling tetrominoes", () => {
   let board;
   let shape = Tetromino.T_SHAPE;
@@ -19,6 +29,22 @@ describe("Falling tetrominoes", () => {
       `....T.....
        ...TT.....
        ....T.....
+       ..........
+       ..........
+       ..........`
+    );
+  })
+
+  test.skip("cannot be rotated left when it would go out of bounds", () => {
+    board.rotateEntityLeft();
+    board.rotateEntityLeft();
+    board.rotateEntityLeft();
+    moveToEdgeLeft(board);
+    board.rotateEntityLeft();
+    expect(board.toString()).to.equalShape(
+      `T.........
+       TT........
+       T.........
        ..........
        ..........
        ..........`
