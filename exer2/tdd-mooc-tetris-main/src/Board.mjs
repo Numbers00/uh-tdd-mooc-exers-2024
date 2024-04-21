@@ -61,6 +61,8 @@ export class Board {
       break;
     case "object":
       if (entity.shape) this.dropTetromino(entity);
+      else
+        throw new Error("unknown dropped entity");
     default:
       throw new Error("unknown dropped entity");
     }
