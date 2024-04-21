@@ -78,7 +78,7 @@ export class Board {
     return !this.latestEntity.hasFallen;
   }
 
-  tick() {
+  tickBlock() {
     const latestEntity = { ...this.latestEntity }
 
     if (
@@ -97,6 +97,10 @@ export class Board {
     this.latestEntity = { ...latestEntity };
 
     this.boardState = newBoardState;
+  }
+
+  tick() {
+    this.tickBlock();
   }
 
   toString() {
