@@ -7,6 +7,11 @@ export class RotatingShape {
      IIII.
      .....
      .....`,
+    `..I..
+     ..I..
+     ..I..
+     ..I..
+     .....`
   ];
 
   constructor(shape) {
