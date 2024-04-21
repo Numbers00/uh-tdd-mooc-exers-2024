@@ -54,7 +54,7 @@ export class Board {
     const dims = { w: tetromino.shape[0].length, h: tetromino.shape.length };
 
     const midPosition = Math.floor(this.width / 2);
-    const targetPositions = Array
+    const targetXPositions = Array
       .from({length: dims.w}, (_, i) => i)
       .map(v => v + midPosition - Math.floor(dims.w / 2))
       // this.width % 2 means the board width is odd
@@ -64,7 +64,7 @@ export class Board {
       if (
         this.boardState[0]
         // Gets the row of the new tetromino currently being iterated on
-        .slice(targetPositions[0], targetPositions[dims.w - 1] + 1)
+        .slice(targetXPositions[0], targetXPositions[dims.w - 1] + 1)
         .some(v => v !== ".")
       ) throw new Error("already falling");
     }
@@ -72,7 +72,7 @@ export class Board {
     // Overwrite coordinates with the new tetromino
     for (let i = 0; i < dims.h; i++) {
       for (let j = 0; j < dims.w; j++) {
-        this.boardState[i][targetPositions[j]] = tetromino.shape[i][j];
+        this.boardState[i][targetXPositions[j]] = tetromino.shape[i][j];
       }
     }
 
@@ -80,7 +80,7 @@ export class Board {
       tetromino: tetromino,
       shape: tetromino.shape,
       dims: dims,
-      xPos: targetPositions,
+      xPos: targetXPositions,
       yPos: Array
         .from({ length: dims.h }, (_, i) => i)
         .filter(v => tetromino.shape[v].some(v => v !== ".")),
