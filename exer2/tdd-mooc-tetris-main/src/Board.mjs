@@ -234,6 +234,12 @@ export class Board {
     this.boardState = newBoardState;
   }
 
+  rotateEntityRight() {
+    if (this.latestEntity.tetromino === null) return;
+
+    const tetrominoRotatedRight = this.latestEntity.tetromino.rotateRight();
+  }
+
   tick() {
     this.moveEntityDown();
   }
