@@ -29,13 +29,13 @@ export class Board {
     };
   }
 
-  drop(shape) {
-    switch (typeof shape) {
+  drop(entity) {
+    switch (typeof entity) {
     case "string":
-      this.dropBlock(shape);
+      this.dropBlock(entity);
       break;
     default:
-      throw new Error("unknown shape");
+      throw new Error("unknown entity");
     }
   }
 
