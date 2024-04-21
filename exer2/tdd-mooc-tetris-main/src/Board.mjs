@@ -213,6 +213,16 @@ export class Board {
     if (
       this._checkNewLatestEntityWillExceedBoardWidth(latestEntity)
     ) return;
+
+    const newBoardState = this.boardState.map(r => [...r]);
+    // Overwrite coordinates with the new tetromino
+    for (let i = 0; i < latestEntity.shape.length; i++) {
+      for (let j = 0; j < latestEntity.shape[0].length; j++) {
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = latestEntity.shape[i][j];
+      }
+    }
+    this.latestEntity = { ...latestEntity };
+    this.boardState = newBoardState;
   }
 
   tick() {
