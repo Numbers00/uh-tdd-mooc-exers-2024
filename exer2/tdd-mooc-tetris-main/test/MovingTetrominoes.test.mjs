@@ -151,4 +151,21 @@ describe("Falling tetrominoes", () => {
        ...TTT....`
     );
   });
+
+  test("cannot be moved down through other blocks", () => {
+    moveToEdgeDown(board);
+
+    board.drop(shape);
+    moveToEdgeDown(board);
+    board.moveEntityDown();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ....T.....
+       ...TTT....
+       ....T.....
+       ...TTT....`
+    );
+  })
 });
