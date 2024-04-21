@@ -8,21 +8,21 @@ export class RotatingShape {
        IIII.
        .....
        .....`
-    ).toString(),
+    ),
     new RotatingShape(
       `..I..
        ..I..
        ..I..
        ..I..
        .....`
-    ).toString()
+    )
   ];
   static O_SHAPE_ORIENTATIONS = [
     new RotatingShape(
       `.OO
        .OO
        ...`
-    ).toString()
+    )
   ]
 
   constructor(shape) {
@@ -41,7 +41,7 @@ export class RotatingShape {
       return this.rotateRight();
     }
 
-    if (this.toString() === RotatingShape.O_SHAPE_ORIENTATIONS[0]) {
+    if (this.toString() === RotatingShape.O_SHAPE_ORIENTATIONS[0].toString()) {
       return this;
     }
 
