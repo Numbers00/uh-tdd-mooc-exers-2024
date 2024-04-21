@@ -60,7 +60,7 @@ export class Board {
     }
     this.latestEntity = {
       shape: tetromino.shape,
-      xPos: [xPositions],
+      xPos: xPositions,
       yPos: Array.from({ length: dims.h }, (_, i) => i),
       hasFallen: false
     };
@@ -85,7 +85,7 @@ export class Board {
   }
 
   tick() {
-    const latestEntity = { ...this.latestEntity }
+    const latestEntity = { ...this.latestEntity };
 
     if (
       latestEntity.yPos.at(-1) + 1 === this.height
@@ -96,7 +96,7 @@ export class Board {
     }
 
     let newBoardState = this.boardState.map(r => [...r]);
-    for (let i = 0; i < latestEntity.shape.length; i++) {
+    for (let i = latestEntity.shape.length - 1; i >= 0; i--) {
       for (let j = 0; j < latestEntity.shape[0].length; j++) {
         newBoardState[latestEntity.yPos[i] + 1][latestEntity.xPos[j]] = latestEntity.shape[i][j];
         newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
