@@ -5,9 +5,13 @@ import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
 function moveToEdgeLeft(board) {
-  const leftMostCol = board.boardState.map(row => row[0]);
-  while (leftMostCol.every(cell => cell === ".")) {
+  let counter = 0
+  while (
+    board.boardState.map(row => row[0]).every(cell => cell === ".")
+    && counter < board.width
+  ) {
     board.moveEntityLeft();
+    counter++;
   }
 }
 
@@ -32,7 +36,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("cannot be moved left beyond the board", () => {
+  test("cannot be moved left beyond the board", () => {
     moveToEdgeLeft(board);
     expect(board.toString()).to.equalShape(
       `.T........
