@@ -28,7 +28,9 @@ export class Board {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
         if (
-          this.boardState[i][j] !== "." && newBoardState[i][j] !== "." && !newLatestEntity.yPos.includes(i) && !newLatestEntity.xPos.includes(j)
+          this.boardState[i][j] !== "." && newBoardState[i][j] !== "."
+          && !newLatestEntity.yPos.includes(i)
+          && !newLatestEntity.xPos.includes(j)
         ) return true;
       }
     }
@@ -202,7 +204,7 @@ export class Board {
     if (this.latestEntity.tetromino === null) return;
 
     const tetrominoRotatedLeft = this.latestEntity.tetromino.rotateLeft();
-    const latestEntity = {
+    const newLatestEntity = {
       ...this.latestEntity,
       tetromino: tetrominoRotatedLeft,
       shape: tetrominoRotatedLeft.shape,
@@ -212,22 +214,22 @@ export class Board {
     };
 
     if (
-      this._checkNewLatestEntityWillExceedBoardWidth(latestEntity)
+      this._checkNewLatestEntityWillExceedBoardWidth(newLatestEntity)
     ) return;
 
     const newBoardState = this.boardState.map(r => [...r]);
     // Overwrite coordinates with the new tetromino
-    for (let i = 0; i < latestEntity.shape.length; i++) {
-      for (let j = 0; j < latestEntity.shape[0].length; j++) {
-        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = latestEntity.shape[i][j];
+    for (let i = 0; i < newLatestEntity.shape.length; i++) {
+      for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
+        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[j]] = newLatestEntity.shape[i][j];
       }
     }
 
     if (
-      this._checkNewBoardWillOverlap(newBoardState, latestEntity)
+      this._checkNewBoardWillOverlap(newBoardState, newLatestEntity)
     ) return;
 
-    this.latestEntity = { ...latestEntity };
+    this.latestEntity = { ...newLatestEntity };
     this.boardState = newBoardState;
   }
 
