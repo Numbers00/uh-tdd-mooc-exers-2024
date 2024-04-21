@@ -23,9 +23,12 @@ export class Board {
     if (this.boardState[0][midPosition] !== ".") {
       throw new Error("already falling");
     }
-    this.boardState[0][midPosition] = shape;
-    this.latestShape = {
-      shape: shape, xPos: midPosition, yPos: 0, hasFallen: false
+    if (typeof shape === "string") {
+      this.boardState[0][midPosition] = shape;
+      this.latestShape = {
+        shape: shape, xPos: midPosition, yPos: 0, hasFallen: false
+      };
+      return;
     }
   }
 
