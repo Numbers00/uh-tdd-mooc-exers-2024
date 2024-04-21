@@ -57,9 +57,17 @@ export class Board {
     }
     this.boardState[0][midPosition] = block;
     this.latestEntity = {
-      tetromino: null,
+      ...this.latestEntity,
       shape: [[block]],
       dims: { w: 1, h: 1 },
+      allPos: {
+        x: [midPosition],
+        y: [0]
+      },
+      occupiedPos: {
+        x: [midPosition],
+        y: [0]
+      },
       xPos: [midPosition],
       yPos: [0],
       hasFallen: false,
