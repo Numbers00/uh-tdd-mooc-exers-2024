@@ -29,6 +29,15 @@ export class Board {
     };
   }
 
+  dropTetromino(tetromino) {
+    const dims = { w: tetromino.shape[0].length, h: tetromino.shape.length };
+
+    const centerState = Array.from({length: dims.w}, (_, i) => i);
+
+    const midPosition = Math.floor(this.width / 2);
+    const midPositions = centerState.map(v => v + midPosition - 1);
+  }
+
   drop(entity) {
     switch (typeof entity) {
     case "string":
