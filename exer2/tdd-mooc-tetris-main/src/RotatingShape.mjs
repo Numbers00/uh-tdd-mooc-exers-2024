@@ -14,9 +14,11 @@ export class RotatingShape {
      .....`
   ];
   static O_SHAPE_ORIENTATIONS = [
+    new RotatingShape(
     `.OO
      .OO
      ...`
+    ).toString()
   ]
 
   constructor(shape) {
@@ -35,12 +37,7 @@ export class RotatingShape {
       return this.rotateRight();
     }
 
-    const O_SHAPE = new RotatingShape(
-      `.OO
-       .OO
-       ...`
-    );
-    if (this.shape.toString() === O_SHAPE.shape.toString()) {
+    if (this.toString() === RotatingShape.O_SHAPE_ORIENTATIONS[0]) {
       return this;
     }
 
