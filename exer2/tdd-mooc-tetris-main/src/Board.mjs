@@ -2,7 +2,7 @@ export class Board {
   width;
   height;
   boardState = [];
-  latestShape = {
+  latestTetromino = {
     shape: "",
     xPos: -1,
     yPos: -1,
@@ -24,7 +24,7 @@ export class Board {
       throw new Error("already falling");
     }
     this.boardState[0][midPosition] = block;
-    this.latestShape = {
+    this.latestTetromino = {
       shape: block, xPos: midPosition, yPos: 0, hasFallen: false
     };
   }
@@ -71,26 +71,26 @@ export class Board {
   }
 
   hasFalling() {
-    return !this.latestShape.hasFallen;
+    return !this.latestTetromino.hasFallen;
   }
 
   tick() {
-    const latestShape = { ...this.latestShape }
+    const latestTetromino = { ...this.latestTetromino }
 
     if (
-      latestShape.yPos + 1 === this.height
-      || this.boardState[latestShape.yPos + 1][latestShape.xPos] !== "."
+      latestTetromino.yPos + 1 === this.height
+      || this.boardState[latestTetromino.yPos + 1][latestTetromino.xPos] !== "."
     ) {
-      this.latestShape.hasFallen = true;
+      this.latestTetromino.hasFallen = true;
       return;
     }
 
     let newBoardState = this.boardState.map(r => [...r]);
-    newBoardState[latestShape.yPos + 1][latestShape.xPos] = latestShape.shape;
-    newBoardState[latestShape.yPos][latestShape.xPos] = ".";
-    latestShape.yPos += 1;
+    newBoardState[latestTetromino.yPos + 1][latestTetromino.xPos] = latestTetromino.shape;
+    newBoardState[latestTetromino.yPos][latestTetromino.xPos] = ".";
+    latestTetromino.yPos += 1;
 
-    this.latestShape = { ...latestShape };
+    this.latestTetromino = { ...latestTetromino };
 
     this.boardState = newBoardState;
   }
