@@ -68,11 +68,13 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("cannot be moved left through other blocks", () => {
+  test("cannot be moved left through other blocks", () => {
     moveToEdgeLeft(board);
+
     board.drop(shape);
     moveToEdgeLeft(board);
     board.moveEntityLeft();
+
     expect(board.toString()).to.equalShape(
       `.T..T.....
        TTTTTT....

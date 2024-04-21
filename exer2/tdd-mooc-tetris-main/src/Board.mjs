@@ -89,7 +89,12 @@ export class Board {
   moveEntityLeft() {
     const latestEntity = { ...this.latestEntity };
 
-    if (latestEntity.xPos[0] === 0) return;
+    for (let i = 0; i < latestEntity.yPos.length; i++) {
+      if (
+        latestEntity.xPos[0] === 0
+        || this.boardState[latestEntity.yPos[i]][latestEntity.xPos[0] - 1] !== "."
+      ) return;
+    }
 
     let newBoardState = this.boardState.map(r => [...r]);
     // Move the entity left by one column
