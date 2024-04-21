@@ -6,6 +6,14 @@ export class Board {
     tetromino: null,
     shape: [[]],
     dims: { w: 0, h: 0 },
+    allPos: {
+      x: [-1],
+      y: [-1]
+    },
+    occupiedPos: {
+      x: [-1],
+      y: [-1]
+    },
     xPos: [-1],
     yPos: [-1],
     hasFallen: false
