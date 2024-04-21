@@ -3,7 +3,7 @@ export class Board {
   height;
   boardState = [];
   latestEntity = {
-    shape: "",
+    shape: [[]],
     xPos: [-1],
     yPos: [-1],
     hasFallen: false
@@ -29,7 +29,7 @@ export class Board {
     }
     this.boardState[0][midPosition] = block;
     this.latestEntity = {
-      shape: block, xPos: [midPosition], yPos: [0], hasFallen: false
+      shape: [[block]], xPos: [midPosition], yPos: [0], hasFallen: false
     };
   }
 
@@ -96,8 +96,12 @@ export class Board {
     }
 
     let newBoardState = this.boardState.map(r => [...r]);
-    newBoardState[latestEntity.yPos.at(-1) + 1][this.getMidElem(latestEntity.xPos)] = latestEntity.shape;
-    newBoardState[latestEntity.yPos[0]][this.getMidElem(latestEntity.xPos)] = ".";
+    for (let i = 0; i < latestEntity.shape.length; i++) {
+      for (let j = 0; j < latestEntity.shape[0].length; j++) {
+        newBoardState[latestEntity.yPos[i] + 1][latestEntity.xPos[j]] = latestEntity.shape[i][j];
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
+      }
+    }
     latestEntity.yPos = latestEntity.yPos.map(v => v + 1);
 
     this.latestEntity = { ...latestEntity };
