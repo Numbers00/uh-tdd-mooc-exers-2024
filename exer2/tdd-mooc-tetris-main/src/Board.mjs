@@ -90,6 +90,16 @@ export class Board {
     const latestEntity = { ...this.latestEntity };
 
     if (latestEntity.xPos[0] === 0) return;
+
+    let newBoardState = this.boardState.map(r => [...r]);
+    // Move the entity left by one column
+    for (let i = 0; i < latestEntity.shape.length; i++) {
+      for (let j = 0; j < latestEntity.shape[0].length; j++) {
+        if (latestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j] - 1] = latestEntity.shape[i][j];
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
+      }
+    }
   }
 
   tick() {
