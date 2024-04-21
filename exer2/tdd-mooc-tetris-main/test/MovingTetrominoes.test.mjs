@@ -94,4 +94,17 @@ describe("Falling tetrominoes", () => {
        ..........`
     );
   })
+
+  test.skip("cannot be moved down beyond the board", () => {
+    fallToBottom(board);
+    board.moveEntityDown();
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ....T.....
+       ...TTT....`
+    );
+  });
 });
