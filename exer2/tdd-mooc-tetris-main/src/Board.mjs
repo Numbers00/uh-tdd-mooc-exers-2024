@@ -46,6 +46,12 @@ export class Board {
       )
         throw new Error("already falling");
     }
+
+    for (let i = 0; i < dims.h; i++) {
+      for (let j = 0; j < dims.w; j++) {
+        this.boardState[i][midPositions[j]] = tetromino.shape[i][j];
+      }
+    }
   }
 
   drop(entity) {
@@ -53,8 +59,10 @@ export class Board {
     case "string":
       this.dropBlock(entity);
       break;
+    case "object":
+      if (entity.shape) this.dropTetromino(entity);
     default:
-      throw new Error("unknown entity");
+      throw new Error("unknown dropped entity");
     }
   }
 
