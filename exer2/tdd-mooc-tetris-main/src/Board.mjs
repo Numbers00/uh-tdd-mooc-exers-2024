@@ -209,6 +209,10 @@ export class Board {
         .from({ length: tetrominoRotatedLeft.shape.length }, (_, i) => i)
         .filter(v => tetrominoRotatedLeft.shape[v].some(v => v !== ".")),
     };
+
+    if (
+      this._checkNewLatestEntityWillExceedBoardWidth(latestEntity)
+    ) return;
   }
 
   tick() {
