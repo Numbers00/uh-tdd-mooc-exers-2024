@@ -37,7 +37,7 @@ export class Board {
     const dims = { w: tetromino.shape[0].length, h: tetromino.shape.length };
 
     const midPosition = Math.floor(this.width / 2);
-    const midPositions = Array
+    const xPositions = Array
       .from({length: dims.w}, (_, i) => i)
       .map(v => v + midPosition - Math.floor(dims.w / 2))
       // this.width % 2 means the board width is odd
@@ -47,7 +47,7 @@ export class Board {
       if (
         this.boardState[0]
         // Gets the row of the new tetromino currently being iterated on
-        .slice(midPositions[0], midPositions[dims.w - 1] + 1)
+        .slice(xPositions[0], xPositions[dims.w - 1] + 1)
         .some(v => v !== ".")
       )
         throw new Error("already falling");
@@ -55,9 +55,15 @@ export class Board {
 
     for (let i = 0; i < dims.h; i++) {
       for (let j = 0; j < dims.w; j++) {
-        this.boardState[i][midPositions[j]] = tetromino.shape[i][j];
+        this.boardState[i][xPositions[j]] = tetromino.shape[i][j];
       }
     }
+    this.latestEntity = {
+      shape: tetromino.shape,
+      xPos: [xPositions],
+      yPos: Array.from({ length: dims.h }, (_, i) => i),
+      hasFallen: false
+    };
   }
 
   drop(entity) {
