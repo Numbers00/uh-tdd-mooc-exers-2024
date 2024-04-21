@@ -111,6 +111,16 @@ export class Board {
     const latestEntity = { ...this.latestEntity };
 
     if (latestEntity.xPos.at(-1) === this.width - 1) return;
+
+    let newBoardState = this.boardState.map(r => [...r]);
+    // Move the entity right by one column
+    for (let i = 0; i < latestEntity.shape.length; i++) {
+      for (let j = latestEntity.shape[0].length - 1; j >= 0; j--) {
+        if (latestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j] + 1] = latestEntity.shape[i][j];
+        newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
+      }
+    }
   }
 
   tick() {
