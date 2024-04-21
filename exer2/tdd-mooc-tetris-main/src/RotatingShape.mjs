@@ -30,14 +30,7 @@ export class RotatingShape {
   }
 
   rotateLeft() {
-    const I_SHAPE = new RotatingShape(
-      `.....
-       .....
-       IIII.
-       .....
-       .....`
-    );
-    if (this.shape.toString() === I_SHAPE.shape.toString()) {
+    if (this.toString() === RotatingShape.I_SHAPE_ORIENTATIONS[0].toString()) {
       return this.rotateRight();
     }
 
