@@ -121,6 +121,11 @@ export class Board {
         newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
       }
     }
+    latestEntity.xPos = latestEntity.xPos.map(v => v + 1);
+
+    this.latestEntity = { ...latestEntity };
+
+    this.boardState = newBoardState;
   }
 
   tick() {
