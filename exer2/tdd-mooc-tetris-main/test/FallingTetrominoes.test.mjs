@@ -15,7 +15,7 @@ describe("Falling tetrominoes", () => {
     board = new Board(10, 6);
   });
 
-  test.skip("start from the top middle", () => {
+  test("start from the top middle", () => {
     board.drop(Tetromino.T_SHAPE);
 
     expect(board.toString()).to.equalShape(

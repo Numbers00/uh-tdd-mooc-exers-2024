@@ -35,7 +35,9 @@ export class Board {
     const midPosition = Math.floor(this.width / 2);
     const midPositions = Array
       .from({length: dims.w}, (_, i) => i)
-      .map(v => v + midPosition - Math.floor(dims.w / 2));
+      .map(v => v + midPosition - Math.floor(dims.w / 2))
+      // this.width % 2 means the board width is odd
+      .map(v => this.width % 2 ? v : v - 1);
 
     for (let i = 0; i < dims.h; i++) {
       if (
@@ -61,8 +63,8 @@ export class Board {
       break;
     case "object":
       if (entity.shape) this.dropTetromino(entity);
-      else
-        throw new Error("unknown dropped entity");
+      else throw new Error("unknown dropped entity");
+      break;
     default:
       throw new Error("unknown dropped entity");
     }
