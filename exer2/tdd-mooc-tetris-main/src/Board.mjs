@@ -3,7 +3,9 @@ export class Board {
   height;
   boardState = [];
   latestEntity = {
+    tetromino: null,
     shape: [[]],
+    dims: { w: 0, h: 0 },
     xPos: [-1],
     yPos: [-1],
     hasFallen: false
@@ -29,7 +31,12 @@ export class Board {
     }
     this.boardState[0][midPosition] = block;
     this.latestEntity = {
-      shape: [[block]], xPos: [midPosition], yPos: [0], hasFallen: false
+      tetromino: null,
+      shape: [[block]],
+      dims: { w: 1, h: 1 },
+      xPos: [midPosition],
+      yPos: [0],
+      hasFallen: false,
     };
   }
 
@@ -59,7 +66,9 @@ export class Board {
       }
     }
     this.latestEntity = {
+      tetromino: tetromino,
       shape: tetromino.shape,
+      dims: dims,
       xPos: xPositions,
       yPos: Array
         .from({ length: dims.h }, (_, i) => i)
