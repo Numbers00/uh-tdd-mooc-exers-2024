@@ -19,16 +19,19 @@ export class Board {
   }
 
   drop(shape) {
-    const midPosition = Math.floor(this.width / 2);
-    if (this.boardState[0][midPosition] !== ".") {
-      throw new Error("already falling");
-    }
-    if (typeof shape === "string") {
+    switch (typeof shape) {
+    case "string":
+      const midPosition = Math.floor(this.width / 2);
+      if (this.boardState[0][midPosition] !== ".") {
+        throw new Error("already falling");
+      }
       this.boardState[0][midPosition] = shape;
       this.latestShape = {
         shape: shape, xPos: midPosition, yPos: 0, hasFallen: false
       };
-      return;
+      break;
+    default:
+      throw new Error("unknown shape");
     }
   }
 
