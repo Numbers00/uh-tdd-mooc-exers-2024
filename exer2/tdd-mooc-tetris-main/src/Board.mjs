@@ -247,7 +247,15 @@ export class Board {
         .filter(v => tetrominoRotatedRight.shape[v].some(v => v !== ".")),
     };
 
-    if (this._checkNewLatestEntityWillExceedBoardWidth(newLatestEntity)) return;
+    if (
+      this._checkNewLatestEntityWillExceedBoardWidth(newLatestEntity)
+    ) return;
+
+    const newBoardState = this.boardState.map(r => [...r]);
+
+    if (
+      this._checkNewBoardWillOverlap(newBoardState, newLatestEntity)
+    ) return;
   }
 
   tick() {
