@@ -61,7 +61,9 @@ export class Board {
     this.latestEntity = {
       shape: tetromino.shape,
       xPos: xPositions,
-      yPos: Array.from({ length: dims.h }, (_, i) => i),
+      yPos: Array
+        .from({ length: dims.h }, (_, i) => i)
+        .filter(v => tetromino.shape[v].some(v => v !== ".")),
       hasFallen: false
     };
   }
@@ -96,8 +98,10 @@ export class Board {
     }
 
     let newBoardState = this.boardState.map(r => [...r]);
+    // Move the entity down by one row
     for (let i = latestEntity.shape.length - 1; i >= 0; i--) {
       for (let j = 0; j < latestEntity.shape[0].length; j++) {
+        if (latestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
         newBoardState[latestEntity.yPos[i] + 1][latestEntity.xPos[j]] = latestEntity.shape[i][j];
         newBoardState[latestEntity.yPos[i]][latestEntity.xPos[j]] = ".";
       }
