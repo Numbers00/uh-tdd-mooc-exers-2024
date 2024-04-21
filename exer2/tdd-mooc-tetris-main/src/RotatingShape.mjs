@@ -2,22 +2,26 @@ export class RotatingShape {
   shape = [[]];
 
   static I_SHAPE_ORIENTATIONS = [
-    `.....
-     .....
-     IIII.
-     .....
-     .....`,
-    `..I..
-     ..I..
-     ..I..
-     ..I..
-     .....`
+    new RotatingShape(
+      `.....
+       .....
+       IIII.
+       .....
+       .....`
+    ).toString(),
+    new RotatingShape(
+      `..I..
+       ..I..
+       ..I..
+       ..I..
+       .....`
+    ).toString()
   ];
   static O_SHAPE_ORIENTATIONS = [
     new RotatingShape(
-    `.OO
-     .OO
-     ...`
+      `.OO
+       .OO
+       ...`
     ).toString()
   ]
 
