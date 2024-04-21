@@ -24,6 +24,16 @@ export class Board {
     return arr[Math.floor(arr.length / 2)];
   }
 
+  checkNewBoardWillOverlap(newBoardState) {
+    for (let i = 0; i < this.height; i++) {
+      for (let j = 0; j < this.width; j++) {
+        if (this.boardState[i][j] !== "." && newBoardState[i][j] !== ".")
+          return true;
+      }
+    }
+    return false;
+  }
+
   dropBlock(block) {
     const midPosition = Math.floor(this.width / 2);
     if (this.boardState[0][midPosition] !== ".") {
