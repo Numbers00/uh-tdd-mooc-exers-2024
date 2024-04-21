@@ -20,7 +20,7 @@ export class Board {
     );
   }
 
-  getMidElem(arr) {
+  _getMidElem(arr) {
     return arr[Math.floor(arr.length / 2)];
   }
 
@@ -152,7 +152,7 @@ export class Board {
 
     if (
       latestEntity.yPos.at(-1) + 1 === this.height
-      || this.boardState[latestEntity.yPos.at(-1) + 1][this.getMidElem(latestEntity.xPos)] !== "."
+      || this.boardState[latestEntity.yPos.at(-1) + 1][this._getMidElem(latestEntity.xPos)] !== "."
     ) {
       this.latestEntity.hasFallen = true;
       return;
