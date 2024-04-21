@@ -51,19 +51,11 @@ export class RotatingShape {
   }
 
   rotateRight() {
-    const I_SHAPE = new RotatingShape(
-      `..I..
-       ..I..
-       ..I..
-       ..I..
-       .....`
-    );
-    if (this.shape.toString() === I_SHAPE.shape.toString())
+    if (this.toString() === RotatingShape.I_SHAPE_ORIENTATIONS[1].toString())
       return this.rotateLeft();
 
-    if (this.toString() === RotatingShape.O_SHAPE_ORIENTATIONS[0].toString()) {
+    if (this.toString() === RotatingShape.O_SHAPE_ORIENTATIONS[0].toString())
       return this;
-    }
 
     const dims = { w: this.shape[0].length, h: this.shape.length };
     let newShape = this.shape.map(r => [...r]);
