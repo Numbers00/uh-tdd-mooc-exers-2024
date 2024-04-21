@@ -4,6 +4,13 @@ import { beforeEach, describe, test } from "vitest";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
+function moveToEdgeLeft(board) {
+  const leftMostCol = board.boardState.map(row => row[0]);
+  while (leftMostCol.every(cell => cell === ".")) {
+    board.moveEntityLeft();
+  }
+}
+
 describe("Falling tetrominoes", () => {
   let board;
   let shape = Tetromino.T_SHAPE;
@@ -26,7 +33,7 @@ describe("Falling tetrominoes", () => {
   })
 
   test.skip("cannot be moved left beyond the board", () => {
-    moveToEdgeLeft();
+    moveToEdgeLeft(board);
     expect(board.toString()).to.equalShape(
       `.T........
        TTT.......
