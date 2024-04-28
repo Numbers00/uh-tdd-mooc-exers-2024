@@ -44,6 +44,14 @@ export class Board {
     return false;
   }
 
+  _checkNewLatestEntityWillExceedBoardLeftLimit(newLatestEntity) {
+    return newLatestEntity.occupiedPos.x[0] < 0;
+  }
+
+  _checkNewLatestEntityWillExceedBoardRightLimit(newLatestEntity) {
+    return newLatestEntity.occupiedPos.x.at(-1) >= this.width;
+  }
+
   _checkNewLatestEntityWillExceedBoardWidth(newLatestEntity) {
     return newLatestEntity.occupiedPos.x.some(v => v < 0 || v >= this.width);
   }
