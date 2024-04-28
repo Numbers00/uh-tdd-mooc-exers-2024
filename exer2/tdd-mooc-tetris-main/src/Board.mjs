@@ -48,7 +48,7 @@ export class Board {
     return newLatestEntity.occupiedPos.x.some(v => v < 0 || v >= this.width);
   }
 
-  _calcAllXPos(shape) {
+  _calcEntityAllXPos(shape) {
     return Array
       .from({ length: shape[0].length }, (_, i) => i)
       .map(v => v + Math.floor(this.width / 2) - Math.floor(shape[0].length / 2))
@@ -56,12 +56,12 @@ export class Board {
       .map(v => this.width % 2 ? v : v - 1);
   }
 
-  _calcAllYPos(shape) {
+  _calcEntityAllYPos(shape) {
     return Array
       .from({ length: shape.length }, (_, i) => i);
   }
 
-  _filterOccupiedXPos(allXPositions) {
+  _calcEntityOccupiedXPos(allXPositions) {
     let xPositions = [...allXPositions];
 
     const leftMostCol = tetromino.shape.map(row => row[0]);
@@ -74,7 +74,7 @@ export class Board {
   }
 
   // Takes in tetromino.shape
-  _filterOccupiedYPos(shape) {
+  _calcEntityOccupiedYPos(shape) {
     return Array
       .from({ length: shape.length }, (_, i) => i)
       .filter(v => shape[v].some(v => v !== "."));
