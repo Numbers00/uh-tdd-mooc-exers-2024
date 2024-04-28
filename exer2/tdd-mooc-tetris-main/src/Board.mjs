@@ -178,10 +178,10 @@ export class Board {
   moveEntityRight() {
     const newLatestEntity = { ...this.latestEntity };
 
-    for (let i = 0; i < newLatestEntity.yPos.length; i++) {
+    for (let i = 0; i < newLatestEntity.occupiedPos.y.length; i++) {
       if (
-        newLatestEntity.xPos.at(-1) + 1 === this.width
-        || this.boardState[newLatestEntity.yPos[i]][newLatestEntity.xPos.at(-1) + 1] !== "."
+        newLatestEntity.occupiedPos.x.at(-1) + 1 === this.width
+        || this.boardState[newLatestEntity.occupiedPos.y[i]][newLatestEntity.occupiedPos.x.at(-1) + 1] !== "."
       ) return;
     }
 
@@ -190,11 +190,11 @@ export class Board {
     for (let i = 0; i < newLatestEntity.shape.length; i++) {
       for (let j = newLatestEntity.shape[0].length - 1; j >= 0; j--) {
         if (newLatestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
-        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[j] + 1] = newLatestEntity.shape[i][j];
-        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[j]] = ".";
+        newBoardState[newLatestEntity.occupiedPos.y[i]][newLatestEntity.occupiedPos.x[j] + 1] = newLatestEntity.shape[i][j];
+        newBoardState[newLatestEntity.occupiedPos.y[i]][newLatestEntity.occupiedPos.x[j]] = ".";
       }
     }
-    newLatestEntity.xPos = newLatestEntity.xPos.map(v => v + 1);
+    newLatestEntity.occupiedPos.x = newLatestEntity.occupiedPos.x.map(v => v + 1);
 
     this.latestEntity = { ...newLatestEntity };
 
