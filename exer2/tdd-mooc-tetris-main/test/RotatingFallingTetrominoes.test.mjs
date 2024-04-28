@@ -24,6 +24,12 @@ function moveToEdgeRight(board) {
   }
 }
 
+function fallToBottom(board) {
+  for (let i = 0; i < 10; i++) {
+    board.tick();
+  }
+}
+
 describe("Falling tetrominoes", () => {
   let board;
   let shape = Tetromino.T_SHAPE;
