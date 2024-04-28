@@ -227,10 +227,11 @@ export class Board {
     for (let i = newLatestEntity.shape.length - 1; i >= 0; i--) {
       for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
         if (newLatestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
-        newBoardState[newLatestEntity.occupiedPos.y[i] + 1][newLatestEntity.occupiedPos.x[j]] = newLatestEntity.shape[i][j];
-        newBoardState[newLatestEntity.occupiedPos.y[i]][newLatestEntity.occupiedPos.x[j]] = ".";
+        newBoardState[newLatestEntity.allPos.y[i] + 1][newLatestEntity.allPos.x[j]] = newLatestEntity.shape[i][j];
+        newBoardState[newLatestEntity.allPos.y[i]][newLatestEntity.allPos.x[j]] = ".";
       }
     }
+    newLatestEntity.allPos.y = newLatestEntity.allPos.y.map(v => v + 1);
     newLatestEntity.occupiedPos.y = newLatestEntity.occupiedPos.y.map(v => v + 1);
 
     this.latestEntity = { ...newLatestEntity };
