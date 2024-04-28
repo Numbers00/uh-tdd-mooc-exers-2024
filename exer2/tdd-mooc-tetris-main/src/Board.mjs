@@ -48,6 +48,18 @@ export class Board {
     return newLatestEntity.occupiedPos.x.some(v => v < 0 || v >= this.width);
   }
 
+  _filterOccupiedXPos(allXPositions) {
+    let xPositions = [...allXPositions];
+
+    const leftMostCol = tetromino.shape.map(row => row[0]);
+    if (leftMostCol.every(v => v === ".")) xPositions.shift();
+
+    const rightMostCol = tetromino.shape.map(row => row.at(-1));
+    if (rightMostCol.every(v => v === ".")) xPositions.pop();
+
+    return xPositions;
+  }
+
   dropBlock(block) {
     const midPosition = Math.floor(this.width / 2);
     if (this.boardState[0][midPosition] !== ".") {
