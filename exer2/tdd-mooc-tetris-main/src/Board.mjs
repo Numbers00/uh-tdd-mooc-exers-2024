@@ -61,13 +61,13 @@ export class Board {
       .from({ length: shape.length }, (_, i) => i);
   }
 
-  _calcEntityOccupiedXPos(allXPositions) {
-    let xPositions = [...allXPositions];
+  _calcEntityOccupiedXPos(shape) {
+    let xPositions = this._calcEntityAllXPos(shape);
 
-    const leftMostCol = tetromino.shape.map(row => row[0]);
+    const leftMostCol = shape.map(row => row[0]);
     if (leftMostCol.every(v => v === ".")) xPositions.shift();
 
-    const rightMostCol = tetromino.shape.map(row => row.at(-1));
+    const rightMostCol = shape.map(row => row.at(-1));
     if (rightMostCol.every(v => v === ".")) xPositions.pop();
 
     return xPositions;
