@@ -285,8 +285,12 @@ export class Board {
       ...this.latestEntity,
       tetromino: tetrominoRotatedRight,
       shape: tetrominoRotatedRight.shape,
+      allPos: {
+        x: this._calcEntityAllXPos(tetrominoRotatedRight.shape),
+        y: this._calcEntityAllYPos(tetrominoRotatedRight.shape),
+      },
       occupiedPos: {
-        ...this.latestEntity.occupiedPos,
+        x: this._calcEntityOccupiedXPos(tetrominoRotatedRight.shape),
         y: this._calcEntityOccupiedYPos(tetrominoRotatedRight.shape),
       },
     };
@@ -299,7 +303,7 @@ export class Board {
     // Overwrite coordinates with the new tetromino
     for (let i = 0; i < newLatestEntity.shape.length; i++) {
       for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
-        newBoardState[newLatestEntity.occupiedPos.y[i]][newLatestEntity.occupiedPos.x[j]] = newLatestEntity.shape[i][j];
+        newBoardState[newLatestEntity.allPos.y[i]][newLatestEntity.allPos.x[j]] = newLatestEntity.shape[i][j];
       }
     }
 
