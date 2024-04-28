@@ -45,7 +45,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test("cannot be rotated left when it would go out of bounds", () => {
+  test.skip("cannot be rotated left when it would go out of bounds", () => {
     board.rotateEntityRight();
     moveToEdgeLeft(board);
     board.rotateEntityLeft();
@@ -57,6 +57,21 @@ describe("Falling tetrominoes", () => {
        ..........
        ..........`
     );
+  })
+
+  test.skip("will wall kick when rotating left will make it go out of bounds", () => {
+    board.rotateEntityRight();
+    moveToEdgeLeft(board);
+    board.rotateEntityLeft();
+    expect(board.toString()).to.equalShape(
+      `.T........
+       TTT.......
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  
   })
 
   test("can be rotated right", () => {
@@ -71,7 +86,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test("cannot be rotated right when it would go out of bounds", () => {
+  test.skip("cannot be rotated right when it would go out of bounds", () => {
     board.rotateEntityLeft();
     moveToEdgeRight(board);
     board.rotateEntityRight();
