@@ -16,6 +16,7 @@ export class Board {
     },
     hasFallen: false
   }
+  previousEntities = [];
 
   constructor(width, height) {
     this.width = width;
@@ -38,6 +39,7 @@ export class Board {
           && newBoardState[i][j] !== "."
           && !newLatestEntity.occupiedPos.y.includes(i)
           && !newLatestEntity.occupiedPos.x.includes(j)
+          && !this.previousEntities.some(entity => entity.occupiedPos.y.includes(i) && entity.occupiedPos.x.includes(j))
         ) return true;
       }
     }
@@ -227,6 +229,7 @@ export class Board {
       || this.boardState[newLatestEntity.occupiedPos.y.at(-1) + 1][this._getMidElem(newLatestEntity.occupiedPos.x)] !== "."
     ) {
       this.latestEntity.hasFallen = true;
+      this.previousEntities.push({ ...this.latestEntity });
       return;
     }
 
@@ -269,6 +272,8 @@ export class Board {
       this._checkNewLatestEntityWillExceedBoardWidth(newLatestEntity)
     ) return;
 
+    console.log("test")
+
     const newBoardState = this.boardState.map(r => [...r]);
     // Overwrite coordinates with the new tetromino
     for (let i = 0; i < newLatestEntity.shape.length; i++) {
@@ -280,6 +285,8 @@ export class Board {
     if (
       this._checkNewBoardWillOverlap(newBoardState, newLatestEntity)
     ) return;
+
+    console.log("test2")
 
     this.latestEntity = { ...newLatestEntity };
     this.boardState = newBoardState;

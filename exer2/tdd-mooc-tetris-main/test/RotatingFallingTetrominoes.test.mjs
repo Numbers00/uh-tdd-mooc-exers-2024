@@ -65,7 +65,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("cannot be rotated left when it would overlap with other blocks", () => {
+  test("cannot be rotated left when it would overlap with other blocks", () => {
     board.rotateEntityRight();
     moveToEdgeLeft(board);
     fallToBottom(board);
