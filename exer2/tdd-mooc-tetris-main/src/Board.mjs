@@ -15,7 +15,6 @@ export class Board {
       y: [-1]
     },
     xPos: [-1],
-    yPos: [-1],
     hasFallen: false
   }
 
@@ -69,7 +68,6 @@ export class Board {
         y: [0]
       },
       xPos: [midPosition],
-      yPos: [0],
       hasFallen: false,
     };
   }
@@ -124,9 +122,6 @@ export class Board {
           .filter(v => tetromino.shape[v].some(v => v !== ".")),
       },
       xPos: xPositions,
-      yPos: Array
-        .from({ length: dims.h }, (_, i) => i)
-        .filter(v => tetromino.shape[v].some(v => v !== ".")),
       hasFallen: false
     };
   }
@@ -242,9 +237,6 @@ export class Board {
           .from({ length: tetrominoRotatedLeft.shape.length }, (_, i) => i)
           .filter(v => tetrominoRotatedLeft.shape[v].some(v => v !== ".")),
       },
-      yPos: Array
-        .from({ length: tetrominoRotatedLeft.shape.length }, (_, i) => i)
-        .filter(v => tetrominoRotatedLeft.shape[v].some(v => v !== ".")),
     };
 
     if (
@@ -281,9 +273,6 @@ export class Board {
           .from({ length: tetrominoRotatedRight.shape.length }, (_, i) => i)
           .filter(v => tetrominoRotatedRight.shape[v].some(v => v !== ".")),
       },
-      yPos: Array
-        .from({ length: tetrominoRotatedRight.shape.length }, (_, i) => i)
-        .filter(v => tetrominoRotatedRight.shape[v].some(v => v !== ".")),
     };
 
     if (
