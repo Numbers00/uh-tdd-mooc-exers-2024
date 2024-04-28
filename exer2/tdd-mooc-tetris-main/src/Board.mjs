@@ -249,9 +249,7 @@ export class Board {
       shape: tetrominoRotatedLeft.shape,
       occupiedPos: {
         ...this.latestEntity.occupiedPos,
-        y: Array
-          .from({ length: tetrominoRotatedLeft.shape.length }, (_, i) => i)
-          .filter(v => tetrominoRotatedLeft.shape[v].some(v => v !== ".")),
+        y: this._calcEntityOccupiedYPos(tetrominoRotatedLeft.shape),
       },
     };
 
@@ -285,9 +283,7 @@ export class Board {
       shape: tetrominoRotatedRight.shape,
       occupiedPos: {
         ...this.latestEntity.occupiedPos,
-        y: Array
-          .from({ length: tetrominoRotatedRight.shape.length }, (_, i) => i)
-          .filter(v => tetrominoRotatedRight.shape[v].some(v => v !== ".")),
+        y: this._calcEntityOccupiedYPos(tetrominoRotatedRight.shape),
       },
     };
 
