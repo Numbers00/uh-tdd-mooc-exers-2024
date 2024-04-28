@@ -35,7 +35,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("cannot be rotated left when it would go out of bounds", () => {
+  test("cannot be rotated left when it would go out of bounds", () => {
     board.rotateEntityLeft();
     board.rotateEntityLeft();
     board.rotateEntityLeft();
