@@ -205,8 +205,8 @@ export class Board {
     const newLatestEntity = { ...this.latestEntity };
 
     if (
-      newLatestEntity.yPos.at(-1) + 1 === this.height
-      || this.boardState[newLatestEntity.yPos.at(-1) + 1][this._getMidElem(newLatestEntity.xPos)] !== "."
+      newLatestEntity.occupiedPos.y.at(-1) + 1 === this.height
+      || this.boardState[newLatestEntity.occupiedPos.y.at(-1) + 1][this._getMidElem(newLatestEntity.occupiedPos.x)] !== "."
     ) {
       this.latestEntity.hasFallen = true;
       return;
@@ -217,11 +217,11 @@ export class Board {
     for (let i = newLatestEntity.shape.length - 1; i >= 0; i--) {
       for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
         if (newLatestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
-        newBoardState[newLatestEntity.yPos[i] + 1][newLatestEntity.xPos[j]] = newLatestEntity.shape[i][j];
-        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[j]] = ".";
+        newBoardState[newLatestEntity.occupiedPos.y[i] + 1][newLatestEntity.occupiedPos.x[j]] = newLatestEntity.shape[i][j];
+        newBoardState[newLatestEntity.occupiedPos.y[i]][newLatestEntity.occupiedPos.x[j]] = ".";
       }
     }
-    newLatestEntity.yPos = newLatestEntity.yPos.map(v => v + 1);
+    newLatestEntity.occupiedPos.y = newLatestEntity.occupiedPos.y.map(v => v + 1);
 
     this.latestEntity = { ...newLatestEntity };
 
