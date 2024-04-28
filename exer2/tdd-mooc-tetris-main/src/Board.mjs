@@ -152,7 +152,7 @@ export class Board {
   moveEntityLeft() {
     const newLatestEntity = { ...this.latestEntity };
 
-    for (let i = 0; i < newLatestEntity.yPos.length; i++) {
+    for (let i = 0; i < newLatestEntity.occupiedPos.y.length; i++) {
       if (
         newLatestEntity.occupiedPos.x[0] === 0
         || this.boardState[newLatestEntity.occupiedPos.y[i]][newLatestEntity.occupiedPos.x[0] - 1] !== "."
@@ -164,8 +164,8 @@ export class Board {
     for (let i = 0; i < newLatestEntity.shape.length; i++) {
       for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
         if (newLatestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
-        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.occupiedPos.x[j] - 1] = newLatestEntity.shape[i][j];
-        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.occupiedPos.x[j]] = ".";
+        newBoardState[newLatestEntity.occupiedPos.y[i]][newLatestEntity.occupiedPos.x[j] - 1] = newLatestEntity.shape[i][j];
+        newBoardState[newLatestEntity.occupiedPos.y[i]][newLatestEntity.occupiedPos.x[j]] = ".";
       }
     }
     newLatestEntity.occupiedPos.x = newLatestEntity.occupiedPos.x.map(v => v - 1);
