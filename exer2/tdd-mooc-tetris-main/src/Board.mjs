@@ -38,8 +38,8 @@ export class Board {
         if (
           this.boardState[i][j] !== "."
           && newBoardState[i][j] !== "."
-          && !newLatestEntity.yPos.includes(i)
-          && !newLatestEntity.xPos.includes(j)
+          && !newLatestEntity.occupiedPos.y.includes(i)
+          && !newLatestEntity.occupiedPos.x.includes(j)
         ) return true;
       }
     }
@@ -47,7 +47,7 @@ export class Board {
   }
 
   _checkNewLatestEntityWillExceedBoardWidth(newLatestEntity) {
-    return newLatestEntity.xPos.some(v => v < 0 || v >= this.width);
+    return newLatestEntity.occupiedPos.x.some(v => v < 0 || v >= this.width);
   }
 
   dropBlock(block) {
