@@ -119,9 +119,9 @@ export class Board {
       },
       occupiedPos: {
         x: xPositions,
-        y: Array.from({ length: dims.h }, (_, i) => i)
-          .filter(v => tetromino.shape[v]
-          .some(v => v !== ".")),
+        y: Array
+          .from({ length: dims.h }, (_, i) => i)
+          .filter(v => tetromino.shape[v].some(v => v !== ".")),
       },
       xPos: xPositions,
       yPos: Array
