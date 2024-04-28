@@ -56,6 +56,11 @@ export class Board {
       .map(v => this.width % 2 ? v : v - 1);
   }
 
+  _calcAllYPos(shape) {
+    return Array
+      .from({ length: shape.length }, (_, i) => i);
+  }
+
   _filterOccupiedXPos(allXPositions) {
     let xPositions = [...allXPositions];
 
