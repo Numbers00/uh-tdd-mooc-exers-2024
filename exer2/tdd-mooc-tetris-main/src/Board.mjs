@@ -105,7 +105,6 @@ export class Board {
   dropTetromino(tetromino) {
     const dims = { w: tetromino.shape[0].length, h: tetromino.shape.length };
 
-    const midPosition = Math.floor(this.width / 2);
     const allXPositions = this._calcEntityAllXPos(tetromino.shape);
 
     for (let i = 0; i < dims.h; i++) {
@@ -130,14 +129,11 @@ export class Board {
       dims: dims,
       allPos: {
         x: allXPositions,
-        y: Array
-          .from({ length: dims.h }, (_, i) => i),
+        y: this._calcEntityAllYPos(tetromino.shape),
       },
       occupiedPos: {
         x: this._calcEntityOccupiedXPos(tetromino.shape),
-        y: Array
-          .from({ length: dims.h }, (_, i) => i)
-          .filter(v => tetromino.shape[v].some(v => v !== ".")),
+        y: this._calcEntityOccupiedYPos(tetromino.shape),
       },
       hasFallen: false
     };
