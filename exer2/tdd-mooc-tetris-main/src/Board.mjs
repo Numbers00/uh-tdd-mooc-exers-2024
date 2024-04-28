@@ -119,7 +119,9 @@ export class Board {
       },
       occupiedPos: {
         x: xPositions,
-        y: Array.from({ length: dims.h }, (_, i) => i).filter(v => tetromino.shape[v].some(v => v !== ".")),
+        y: Array.from({ length: dims.h }, (_, i) => i)
+          .filter(v => tetromino.shape[v]
+          .some(v => v !== ".")),
       },
       xPos: xPositions,
       yPos: Array
@@ -152,8 +154,8 @@ export class Board {
 
     for (let i = 0; i < newLatestEntity.yPos.length; i++) {
       if (
-        newLatestEntity.xPos[0] === 0
-        || this.boardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[0] - 1] !== "."
+        newLatestEntity.occupiedPos.x[0] === 0
+        || this.boardState[newLatestEntity.occupiedPos.y[i]][newLatestEntity.occupiedPos.x[0] - 1] !== "."
       ) return;
     }
 
@@ -162,11 +164,11 @@ export class Board {
     for (let i = 0; i < newLatestEntity.shape.length; i++) {
       for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
         if (newLatestEntity.shape[i][j] === ".") continue;  // Skip moving empty spaces
-        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[j] - 1] = newLatestEntity.shape[i][j];
-        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.xPos[j]] = ".";
+        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.occupiedPos.x[j] - 1] = newLatestEntity.shape[i][j];
+        newBoardState[newLatestEntity.yPos[i]][newLatestEntity.occupiedPos.x[j]] = ".";
       }
     }
-    newLatestEntity.xPos = newLatestEntity.xPos.map(v => v - 1);
+    newLatestEntity.occupiedPos.x = newLatestEntity.occupiedPos.x.map(v => v - 1);
 
     this.latestEntity = { ...newLatestEntity };
 
