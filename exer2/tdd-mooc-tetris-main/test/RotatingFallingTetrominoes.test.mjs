@@ -46,9 +46,7 @@ describe("Falling tetrominoes", () => {
   })
 
   test("cannot be rotated left when it would go out of bounds", () => {
-    board.rotateEntityLeft();
-    board.rotateEntityLeft();
-    board.rotateEntityLeft();
+    board.rotateEntityRight();
     moveToEdgeLeft(board);
     board.rotateEntityLeft();
     expect(board.toString()).to.equalShape(
