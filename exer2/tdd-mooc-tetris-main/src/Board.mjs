@@ -124,14 +124,6 @@ export class Board {
       }
     }
 
-    let xPositions = [...allXPositions];
-
-    const leftMostCol = tetromino.shape.map(row => row[0]);
-    if (leftMostCol.every(v => v === ".")) xPositions.shift();
-
-    const rightMostCol = tetromino.shape.map(row => row.at(-1));
-    if (rightMostCol.every(v => v === ".")) xPositions.pop();
-
     this.latestEntity = {
       tetromino: tetromino,
       shape: tetromino.shape,
@@ -142,7 +134,7 @@ export class Board {
           .from({ length: dims.h }, (_, i) => i),
       },
       occupiedPos: {
-        x: xPositions,
+        x: this._calcEntityOccupiedXPos(tetromino.shape),
         y: Array
           .from({ length: dims.h }, (_, i) => i)
           .filter(v => tetromino.shape[v].some(v => v !== ".")),
