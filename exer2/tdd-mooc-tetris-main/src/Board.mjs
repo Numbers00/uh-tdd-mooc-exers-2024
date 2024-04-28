@@ -48,6 +48,14 @@ export class Board {
     return newLatestEntity.occupiedPos.x.some(v => v < 0 || v >= this.width);
   }
 
+  _calcAllXPos(shape) {
+    return Array
+      .from({ length: shape[0].length }, (_, i) => i)
+      .map(v => v + Math.floor(this.width / 2) - Math.floor(shape[0].length / 2))
+      // this.width % 2 means the board width is odd
+      .map(v => this.width % 2 ? v : v - 1);
+  }
+
   _filterOccupiedXPos(allXPositions) {
     let xPositions = [...allXPositions];
 
