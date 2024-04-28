@@ -14,7 +14,6 @@ export class Board {
       x: [-1],
       y: [-1]
     },
-    xPos: [-1],
     hasFallen: false
   }
 
@@ -67,7 +66,6 @@ export class Board {
         x: [midPosition],
         y: [0]
       },
-      xPos: [midPosition],
       hasFallen: false,
     };
   }
@@ -121,7 +119,6 @@ export class Board {
           .from({ length: dims.h }, (_, i) => i)
           .filter(v => tetromino.shape[v].some(v => v !== ".")),
       },
-      xPos: xPositions,
       hasFallen: false
     };
   }
