@@ -89,12 +89,6 @@ export class Board {
       .filter((_, i) => shape[i].some(v => v !== "."));
   }
 
-  _calcEntityOccupiedYPos2(shape) {
-    return Array
-      .from({ length: shape.length }, (_, i) => i)
-      .filter(v => shape[v].some(v => v !== "."));
-  }
-
   dropBlock(block) {
     const midPosition = Math.floor(this.width / 2);
     if (this.boardState[0][midPosition] !== ".") {
