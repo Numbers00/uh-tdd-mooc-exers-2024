@@ -60,7 +60,7 @@ export class Board {
     return newLatestEntity.occupiedPos.x.some(v => v < 0 || v >= this.width);
   }
 
-  _calcEntityAllXPos(shape) {
+  _initEntityAllXPos(shape) {
     return Array
       .from({ length: shape[0].length }, (_, i) => i)
       .map(v => v + Math.floor(this.width / 2) - Math.floor(shape[0].length / 2))
@@ -74,7 +74,7 @@ export class Board {
   }
 
   _calcEntityOccupiedXPos(shape) {
-    let xPositions = this._calcEntityAllXPos(shape);
+    let xPositions = this._initEntityAllXPos(shape);
 
     const leftMostCol = shape.map(row => row[0]);
     if (leftMostCol.every(v => v === ".")) xPositions.shift();
@@ -117,7 +117,7 @@ export class Board {
   dropTetromino(tetromino) {
     const dims = { w: tetromino.shape[0].length, h: tetromino.shape.length };
 
-    const allXPositions = this._calcEntityAllXPos(tetromino.shape);
+    const allXPositions = this._initEntityAllXPos(tetromino.shape);
 
     for (let i = 0; i < dims.h; i++) {
       if (
@@ -261,7 +261,7 @@ export class Board {
       tetromino: tetrominoRotatedLeft,
       shape: tetrominoRotatedLeft.shape,
       allPos: {
-        x: this._calcEntityAllXPos(tetrominoRotatedLeft.shape),
+        x: this._initEntityAllXPos(tetrominoRotatedLeft.shape),
         y: this._calcEntityAllYPos(tetrominoRotatedLeft.shape),
       },
       occupiedPos: {
@@ -299,7 +299,7 @@ export class Board {
       tetromino: tetrominoRotatedRight,
       shape: tetrominoRotatedRight.shape,
       allPos: {
-        x: this._calcEntityAllXPos(tetrominoRotatedRight.shape),
+        x: this._initEntityAllXPos(tetrominoRotatedRight.shape),
         y: this._calcEntityAllYPos(tetrominoRotatedRight.shape),
       },
       occupiedPos: {
