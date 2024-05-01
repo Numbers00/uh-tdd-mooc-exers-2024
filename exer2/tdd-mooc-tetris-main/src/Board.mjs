@@ -68,7 +68,7 @@ export class Board {
       .map(v => this.width % 2 ? v : v - 1);
   }
 
-  _calcEntityAllYPos(shape) {
+  _initEntityAllYPos(shape) {
     return Array
       .from({ length: shape.length }, (_, i) => i);
   }
@@ -141,7 +141,7 @@ export class Board {
       dims: dims,
       allPos: {
         x: allXPositions,
-        y: this._calcEntityAllYPos(tetromino.shape),
+        y: this._initEntityAllYPos(tetromino.shape),
       },
       occupiedPos: {
         x: this._calcEntityOccupiedXPos(tetromino.shape),
@@ -262,7 +262,7 @@ export class Board {
       shape: tetrominoRotatedLeft.shape,
       allPos: {
         x: this._initEntityAllXPos(tetrominoRotatedLeft.shape),
-        y: this._calcEntityAllYPos(tetrominoRotatedLeft.shape),
+        y: this._initEntityAllYPos(tetrominoRotatedLeft.shape),
       },
       occupiedPos: {
         x: this._calcEntityOccupiedXPos(tetrominoRotatedLeft.shape),
@@ -300,7 +300,7 @@ export class Board {
       shape: tetrominoRotatedRight.shape,
       allPos: {
         x: this._initEntityAllXPos(tetrominoRotatedRight.shape),
-        y: this._calcEntityAllYPos(tetrominoRotatedRight.shape),
+        y: this._initEntityAllYPos(tetrominoRotatedRight.shape),
       },
       occupiedPos: {
         x: this._calcEntityOccupiedXPos(tetrominoRotatedRight.shape),
