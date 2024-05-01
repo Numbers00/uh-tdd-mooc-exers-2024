@@ -225,7 +225,6 @@ export class Board {
 
     if (
       newLatestEntity.occupiedPos.y.at(-1) + 1 === this.height
-      || this.boardState[newLatestEntity.occupiedPos.y.at(-1) + 1][this._getMidElem(newLatestEntity.occupiedPos.x)] !== "."
     ) {
       this.latestEntity.hasFallen = true;
       this.previousEntities.push({ ...this.latestEntity });
@@ -243,6 +242,14 @@ export class Board {
     }
     newLatestEntity.allPos.y = newLatestEntity.allPos.y.map(v => v + 1);
     newLatestEntity.occupiedPos.y = newLatestEntity.occupiedPos.y.map(v => v + 1);
+
+    if (
+      this._checkNewBoardWillOverlap(newBoardState)
+    ) {
+      this.latestEntity.hasFallen = true;
+      this.previousEntities.push({ ...this.latestEntity });
+      return;
+    }
 
     this.latestEntity = { ...newLatestEntity };
 
