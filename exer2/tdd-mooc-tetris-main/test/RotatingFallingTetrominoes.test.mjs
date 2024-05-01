@@ -111,7 +111,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("cannot be rotated right when it would go out of bounds", () => {
+  test("cannot be rotated right when it would go out of bounds", () => {
     board.rotateEntityLeft();
     moveToEdgeRight(board);
     board.rotateEntityRight();
@@ -122,6 +122,30 @@ describe("Falling tetrominoes", () => {
        ..........
        ..........
        ..........`
+    );
+  })
+
+  test("cannot be rotated left when it would overlap with other blocks", () => {
+    board.rotateEntityLeft();
+    moveToEdgeRight(board);
+    fallToBottom(board);
+    board.drop(Tetromino.T_SHAPE);
+    console.log(`test1\n${board.toString()}`);
+    board.rotateEntityRight();
+    console.log(`test2\n${board.toString()}`);
+    moveToEdgeRight(board);
+    console.log(`test3\n${board.toString()}`);
+    board.tick();
+    console.log(`test4\n${board.toString()}`);
+    board.rotateEntityLeft();  // This should not change anything
+    console.log(`test5\n${board.toString()}`);
+    expect(board.toString()).to.equalShape(
+      `..........
+       ........T.
+       ........TT
+       ........TT
+       ........TT
+       .........T`
     );
   })
 });

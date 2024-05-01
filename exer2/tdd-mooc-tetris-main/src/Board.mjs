@@ -2,7 +2,10 @@ export class Board {
   width;
   height;
   boardState = [];
-  latestEntity = {
+  latestEntity = { ...this.DEFAULT_ENTITY };
+  previousEntities = [];
+
+  static DEFAULT_ENTITY = {
     tetromino: null,
     shape: [[]],
     dims: { w: 0, h: 0 },
@@ -16,7 +19,6 @@ export class Board {
     },
     hasFallen: false
   }
-  previousEntities = [];
 
   constructor(width, height) {
     this.width = width;
@@ -272,8 +274,6 @@ export class Board {
       this._checkNewLatestEntityWillExceedBoardWidth(newLatestEntity)
     ) return;
 
-    console.log("test")
-
     const newBoardState = this.boardState.map(r => [...r]);
     // Overwrite coordinates with the new tetromino
     for (let i = 0; i < newLatestEntity.shape.length; i++) {
@@ -285,8 +285,6 @@ export class Board {
     if (
       this._checkNewBoardWillOverlap(newBoardState, newLatestEntity)
     ) return;
-
-    console.log("test2")
 
     this.latestEntity = { ...newLatestEntity };
     this.boardState = newBoardState;
