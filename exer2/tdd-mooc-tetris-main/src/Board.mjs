@@ -73,6 +73,7 @@ export class Board {
       .from({ length: shape.length }, (_, i) => i);
   }
 
+  // Takes in tetromino.shape
   _calcEntityOccupiedXPos2(shape, xPositions) {
     const leftMostCol = shape.map(row => row[0]);
     if (leftMostCol.every(v => v === ".")) xPositions.shift();
@@ -95,7 +96,11 @@ export class Board {
     return xPositions;
   }
 
-  // Takes in tetromino.shape
+  _calcEntityOccupiedYPos2(yPositions, shape) {
+    return yPositions
+      .filter(v => shape[v].some(v => v !== "."));
+  }
+
   _calcEntityOccupiedYPos(shape) {
     return Array
       .from({ length: shape.length }, (_, i) => i)
