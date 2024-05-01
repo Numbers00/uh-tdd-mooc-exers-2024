@@ -75,13 +75,15 @@ export class Board {
 
   // Takes in tetromino.shape
   _calcEntityOccupiedXPos2(shape, xPositions) {
+    let newXPositions = [...xPositions];
+
     const leftMostCol = shape.map(row => row[0]);
-    if (leftMostCol.every(v => v === ".")) xPositions.shift();
+    if (leftMostCol.every(v => v === ".")) newXPositions.shift();
 
     const rightMostCol = shape.map(row => row.at(-1));
-    if (rightMostCol.every(v => v === ".")) xPositions.pop();
+    if (rightMostCol.every(v => v === ".")) newXPositions.pop();
 
-    return xPositions;
+    return newXPositions;
   }
 
   _calcEntityOccupiedXPos(shape) {
@@ -96,9 +98,9 @@ export class Board {
     return xPositions;
   }
 
-  _calcEntityOccupiedYPos2(yPositions, shape) {
-    return yPositions
-      .filter(v => shape[v].some(v => v !== "."));
+  _calcEntityOccupiedYPos2(shape, yPositions) {
+    return [...yPositions]
+      .filter((_, i) => shape[i].some(v => v !== "."));
   }
 
   _calcEntityOccupiedYPos(shape) {
@@ -275,13 +277,9 @@ export class Board {
       ...this.latestEntity,
       tetromino: tetrominoRotatedLeft,
       shape: tetrominoRotatedLeft.shape,
-      allPos: {
-        x: this._initEntityAllXPos(tetrominoRotatedLeft.shape),
-        y: this._initEntityAllYPos(tetrominoRotatedLeft.shape),
-      },
       occupiedPos: {
-        x: this._calcEntityOccupiedXPos(tetrominoRotatedLeft.shape),
-        y: this._calcEntityOccupiedYPos(tetrominoRotatedLeft.shape),
+        x: this._calcEntityOccupiedXPos2(tetrominoRotatedLeft.shape, this.latestEntity.allPos.x),
+        y: this._calcEntityOccupiedYPos2(tetrominoRotatedLeft.shape, this.latestEntity.allPos.y),
       },
     };
 
@@ -313,13 +311,9 @@ export class Board {
       ...this.latestEntity,
       tetromino: tetrominoRotatedRight,
       shape: tetrominoRotatedRight.shape,
-      allPos: {
-        x: this._initEntityAllXPos(tetrominoRotatedRight.shape),
-        y: this._initEntityAllYPos(tetrominoRotatedRight.shape),
-      },
       occupiedPos: {
-        x: this._calcEntityOccupiedXPos(tetrominoRotatedRight.shape),
-        y: this._calcEntityOccupiedYPos(tetrominoRotatedRight.shape),
+        x: this._calcEntityOccupiedXPos2(tetrominoRotatedRight.shape, this.latestEntity.allPos.x),
+        y: this._calcEntityOccupiedYPos2(tetrominoRotatedRight.shape, this.latestEntity.allPos.y),
       },
     };
 
