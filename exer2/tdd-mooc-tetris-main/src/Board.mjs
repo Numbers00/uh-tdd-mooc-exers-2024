@@ -84,12 +84,12 @@ export class Board {
     return newXPositions;
   }
 
-  _calcEntityOccupiedYPos2(shape, yPositions) {
+  _calcEntityOccupiedYPos(shape, yPositions) {
     return [...yPositions]
       .filter((_, i) => shape[i].some(v => v !== "."));
   }
 
-  _calcEntityOccupiedYPos(shape) {
+  _calcEntityOccupiedYPos2(shape) {
     return Array
       .from({ length: shape.length }, (_, i) => i)
       .filter(v => shape[v].some(v => v !== "."));
@@ -148,7 +148,7 @@ export class Board {
       },
       occupiedPos: {
         x: this._calcEntityOccupiedXPos(tetromino.shape, allXPositions),
-        y: this._calcEntityOccupiedYPos(tetromino.shape),
+        y: this._calcEntityOccupiedYPos(tetromino.shape, this._initEntityAllYPos(tetromino.shape)),
       },
       hasFallen: false
     };
@@ -265,7 +265,7 @@ export class Board {
       shape: tetrominoRotatedLeft.shape,
       occupiedPos: {
         x: this._calcEntityOccupiedXPos(tetrominoRotatedLeft.shape, this.latestEntity.allPos.x),
-        y: this._calcEntityOccupiedYPos2(tetrominoRotatedLeft.shape, this.latestEntity.allPos.y),
+        y: this._calcEntityOccupiedYPos(tetrominoRotatedLeft.shape, this.latestEntity.allPos.y),
       },
     };
 
@@ -299,7 +299,7 @@ export class Board {
       shape: tetrominoRotatedRight.shape,
       occupiedPos: {
         x: this._calcEntityOccupiedXPos(tetrominoRotatedRight.shape, this.latestEntity.allPos.x),
-        y: this._calcEntityOccupiedYPos2(tetrominoRotatedRight.shape, this.latestEntity.allPos.y),
+        y: this._calcEntityOccupiedYPos(tetrominoRotatedRight.shape, this.latestEntity.allPos.y),
       },
     };
 
