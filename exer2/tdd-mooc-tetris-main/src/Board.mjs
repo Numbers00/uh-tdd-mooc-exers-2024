@@ -72,7 +72,7 @@ export class Board {
   }
 
   // Takes in tetromino.shape
-  _calcEntityOccupiedXPos2(shape, xPositions) {
+  _calcEntityOccupiedXPos(shape, xPositions) {
     let newXPositions = [...xPositions];
 
     const leftMostCol = shape.map(row => row[0]);
@@ -84,7 +84,7 @@ export class Board {
     return newXPositions;
   }
 
-  _calcEntityOccupiedXPos(shape) {
+  _calcEntityOccupiedXPos2(shape) {
     let xPositions = this._initEntityAllXPos(shape);
 
     const leftMostCol = shape.map(row => row[0]);
@@ -159,7 +159,7 @@ export class Board {
         y: this._initEntityAllYPos(tetromino.shape),
       },
       occupiedPos: {
-        x: this._calcEntityOccupiedXPos(tetromino.shape),
+        x: this._calcEntityOccupiedXPos(tetromino.shape, allXPositions),
         y: this._calcEntityOccupiedYPos(tetromino.shape),
       },
       hasFallen: false
@@ -276,7 +276,7 @@ export class Board {
       tetromino: tetrominoRotatedLeft,
       shape: tetrominoRotatedLeft.shape,
       occupiedPos: {
-        x: this._calcEntityOccupiedXPos2(tetrominoRotatedLeft.shape, this.latestEntity.allPos.x),
+        x: this._calcEntityOccupiedXPos(tetrominoRotatedLeft.shape, this.latestEntity.allPos.x),
         y: this._calcEntityOccupiedYPos2(tetrominoRotatedLeft.shape, this.latestEntity.allPos.y),
       },
     };
@@ -310,7 +310,7 @@ export class Board {
       tetromino: tetrominoRotatedRight,
       shape: tetrominoRotatedRight.shape,
       occupiedPos: {
-        x: this._calcEntityOccupiedXPos2(tetrominoRotatedRight.shape, this.latestEntity.allPos.x),
+        x: this._calcEntityOccupiedXPos(tetrominoRotatedRight.shape, this.latestEntity.allPos.x),
         y: this._calcEntityOccupiedYPos2(tetrominoRotatedRight.shape, this.latestEntity.allPos.y),
       },
     };
