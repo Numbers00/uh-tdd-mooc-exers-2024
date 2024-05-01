@@ -84,18 +84,6 @@ export class Board {
     return newXPositions;
   }
 
-  _calcEntityOccupiedXPos2(shape) {
-    let xPositions = this._initEntityAllXPos(shape);
-
-    const leftMostCol = shape.map(row => row[0]);
-    if (leftMostCol.every(v => v === ".")) xPositions.shift();
-
-    const rightMostCol = shape.map(row => row.at(-1));
-    if (rightMostCol.every(v => v === ".")) xPositions.pop();
-
-    return xPositions;
-  }
-
   _calcEntityOccupiedYPos2(shape, yPositions) {
     return [...yPositions]
       .filter((_, i) => shape[i].some(v => v !== "."));
