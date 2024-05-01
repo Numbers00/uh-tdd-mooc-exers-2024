@@ -73,6 +73,16 @@ export class Board {
       .from({ length: shape.length }, (_, i) => i);
   }
 
+  _calcEntityOccupiedXPos2(shape, xPositions) {
+    const leftMostCol = shape.map(row => row[0]);
+    if (leftMostCol.every(v => v === ".")) xPositions.shift();
+
+    const rightMostCol = shape.map(row => row.at(-1));
+    if (rightMostCol.every(v => v === ".")) xPositions.pop();
+
+    return xPositions;
+  }
+
   _calcEntityOccupiedXPos(shape) {
     let xPositions = this._initEntityAllXPos(shape);
 
