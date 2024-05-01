@@ -84,7 +84,28 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test("will wall kick when rotating left will make it go out of bounds", () => {
+  test.skip("will wall kick when rotating left will make it go out of bounds", () => {
+    board.rotateEntityLeft();
+    moveToEdgeLeft(board);
+    fallToBottom(board);
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateEntityRight();
+    board.moveEntityLeft();
+    board.moveEntityLeft();
+    board.tick();
+    board.tick();
+    board.rotateEntityLeft();
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ...T......
+       .TTTT.....
+       TT........
+       .T........`
+    );
+  })
+
+  test("will wall kick when rotating left will make it overlap with other blocks", () => {
     board.rotateEntityRight();
     moveToEdgeLeft(board);
     board.rotateEntityLeft();
@@ -96,7 +117,6 @@ describe("Falling tetrominoes", () => {
        ..........
        ..........`
     );
-  
   })
 
   test("can be rotated right", () => {
