@@ -253,7 +253,7 @@ export class Board {
   }
 
   rotateEntityLeft() {
-    if (this.latestEntity.tetromino === null) return;
+    if (this.latestEntity.tetromino === null || this.latestEntity.hasFallen) return;
 
     const tetrominoRotatedLeft = this.latestEntity.tetromino.rotateLeft();
     const newLatestEntity = {
@@ -291,7 +291,7 @@ export class Board {
   }
 
   rotateEntityRight() {
-    if (this.latestEntity.tetromino === null) return;
+    if (this.latestEntity.tetromino === null || this.latestEntity.hasFallen) return;
 
     const tetrominoRotatedRight = this.latestEntity.tetromino.rotateRight();
     const newLatestEntity = {
