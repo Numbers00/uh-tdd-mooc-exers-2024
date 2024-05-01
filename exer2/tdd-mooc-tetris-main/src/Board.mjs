@@ -89,6 +89,17 @@ export class Board {
       .filter((_, i) => shape[i].some(v => v !== "."));
   }
 
+  _overwriteBoardState(boardState, latestEntity) {
+    let newBoardState = boardState.map(r => [...r]);
+    let newLatestEntity = { ...latestEntity }; 
+    for (let i = 0; i < newLatestEntity.shape.length; i++) {
+      for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
+        newBoardState[newLatestEntity.allPos.y[i]][newLatestEntity.allPos.x[j]] = newLatestEntity.shape[i][j];
+      }
+    }
+    return newBoardState;
+  }
+
   dropBlock(block) {
     const midPosition = Math.floor(this.width / 2);
     if (this.boardState[0][midPosition] !== ".") {
