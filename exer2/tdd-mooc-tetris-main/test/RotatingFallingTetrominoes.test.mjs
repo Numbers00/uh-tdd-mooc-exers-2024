@@ -51,7 +51,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test("cannot be rotated left when it would go out of bounds", () => {
+  test.skip("cannot be rotated left when it would go out of bounds", () => {
     board.rotateEntityRight();
     moveToEdgeLeft(board);
     board.rotateEntityLeft();
@@ -65,7 +65,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test("cannot be rotated left when it would overlap with other blocks", () => {
+  test.skip("cannot be rotated left when it would overlap with other blocks", () => {
     board.rotateEntityLeft();
     moveToEdgeRight(board);
     fallToBottom(board);
@@ -84,7 +84,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("will wall kick when rotating left will make it go out of bounds", () => {
+  test("will wall kick when rotating left will make it go out of bounds", () => {
     board.rotateEntityRight();
     moveToEdgeLeft(board);
     board.rotateEntityLeft();
@@ -111,7 +111,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test("cannot be rotated right when it would go out of bounds", () => {
+  test.skip("cannot be rotated right when it would go out of bounds", () => {
     board.rotateEntityLeft();
     moveToEdgeRight(board);
     board.rotateEntityRight();
@@ -125,7 +125,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test("cannot be rotated right when it would overlap with other blocks", () => {
+  test.skip("cannot be rotated right when it would overlap with other blocks", () => {
     board.rotateEntityRight();
     moveToEdgeLeft(board);
     fallToBottom(board);

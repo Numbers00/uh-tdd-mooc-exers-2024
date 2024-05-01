@@ -271,8 +271,11 @@ export class Board {
     };
 
     if (
-      this._checkNewLatestEntityWillExceedBoardWidth(newLatestEntity)
-    ) return;
+      this._checkNewLatestEntityWillExceedBoardLeftLimit(newLatestEntity)
+    ) {
+      newLatestEntity.allPos.x = newLatestEntity.allPos.x.map(v => v + 1);
+      newLatestEntity.occupiedPos.x = newLatestEntity.occupiedPos.x.map(v => v + 1);
+    }
 
     const newBoardState = this.boardState.map(r => [...r]);
     // Overwrite coordinates with the new tetromino
