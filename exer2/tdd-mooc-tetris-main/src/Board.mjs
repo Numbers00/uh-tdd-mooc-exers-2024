@@ -33,7 +33,7 @@ export class Board {
     return arr[Math.floor(arr.length / 2)];
   }
 
-  _checkNewBoardWillOverlap(newBoardState, newLatestEntity) {
+  _checkNewBoardWillOverlap(newBoardState) {
     let oldNumOccupiedCells = 0;
     let newNumOccupiedCells = 0;
     for (let i = 0; i < this.height; i++) {
@@ -294,7 +294,7 @@ export class Board {
     }
 
     if (
-      this._checkNewBoardWillOverlap(newBoardState, newLatestEntity)
+      this._checkNewBoardWillOverlap(newBoardState)
     ) return;
 
     this.latestEntity = { ...newLatestEntity };
@@ -328,7 +328,7 @@ export class Board {
     }
 
     if (
-      this._checkNewBoardWillOverlap(newBoardState, newLatestEntity)
+      this._checkNewBoardWillOverlap(newBoardState)
     ) return;
 
     this.latestEntity = { ...newLatestEntity };
