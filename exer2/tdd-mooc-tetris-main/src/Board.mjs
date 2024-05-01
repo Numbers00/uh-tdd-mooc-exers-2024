@@ -89,6 +89,7 @@ export class Board {
       .filter((_, i) => shape[i].some(v => v !== "."));
   }
 
+  // Overwrite coordinates with the new tetromino
   _overwriteBoardState(boardState, latestEntity) {
     let newBoardState = boardState.map(r => [...r]);
     let newLatestEntity = { ...latestEntity }; 
@@ -288,14 +289,7 @@ export class Board {
       newLatestEntity.occupiedPos.x = newLatestEntity.occupiedPos.x.map(v => v + 1);
     }
 
-    const newBoardState = this.boardState.map(r => [...r]);
-    // Overwrite coordinates with the new tetromino
-    for (let i = 0; i < newLatestEntity.shape.length; i++) {
-      for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
-        newBoardState[newLatestEntity.allPos.y[i]][newLatestEntity.allPos.x[j]] = newLatestEntity.shape[i][j];
-      }
-    }
-
+    let newBoardState = this._overwriteBoardState(this.boardState, newLatestEntity);
     if (
       this._checkNewBoardWillOverlap(newBoardState)
     ) return;
