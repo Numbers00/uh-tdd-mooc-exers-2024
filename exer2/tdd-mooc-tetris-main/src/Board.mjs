@@ -118,6 +118,16 @@ export class Board {
     return newBoardState;
   }
 
+  checkBoardStatesAreEqual(boardState1, boardState2) {
+    if (boardState1.length !== boardState2.length) return false;
+    for (let i = 0; i < boardState1.length; i++) {
+      if (boardState1[i].length !== boardState2[i].length) return false;
+      for (let j = 0; j < boardState1[i].length; j++) {
+        if (boardState1[i][j] !== boardState2[i][j]) return false;
+      }
+    }
+    return true;
+  }
   dropBlock(block) {
     const midPosition = Math.floor(this.width / 2);
     if (this.boardState[0][midPosition] !== ".") {
