@@ -292,7 +292,7 @@ export class Board {
     this.boardState = newBoardState;
   }
 
-  rotateEntityLeft() {
+  rotateEntityLeft({ iter = 0 } = {}) {
     if (this.latestEntity.tetromino === null || this.latestEntity.hasFallen) return;
 
     const tetrominoRotatedLeft = this.latestEntity.tetromino.rotateLeft();
@@ -314,11 +314,14 @@ export class Board {
     }
 
     let newBoardState = this._overwriteBoardState(this.boardState, newLatestEntity);
-    if (
+    if (iter && this._checkNewBoardWillOverlap(newBoardState)) {
+      this.moveEntityLeft();
+      return;
+    } else if (
       this._checkNewBoardWillOverlap(newBoardState)
     ) {
       this.moveEntityRight();
-      this.rotateEntityLeft();
+      this.rotateEntityLeft({ iter: 1 });
       return;
     }
 
