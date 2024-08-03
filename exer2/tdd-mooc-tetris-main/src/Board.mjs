@@ -114,7 +114,7 @@ export class Board {
         newBoardState[newLatestEntity.allPos.y[i]][newLatestEntity.allPos.x[j]] = newLatestEntity.shape[i][j];
       }
     }
-    if (willOverlap) return boardState;
+    // if (willOverlap) return boardState;
     return newBoardState;
   }
 
@@ -319,7 +319,11 @@ export class Board {
     let newBoardState = this._overwriteBoardState(this.boardState, newLatestEntity);
     if (
       this._checkNewBoardWillOverlap(newBoardState)
-    ) return;
+    ) {
+      this.moveEntityRight();
+      this.rotateEntityLeft();
+      return;
+    }
 
     this.latestEntity = { ...newLatestEntity };
     this.boardState = newBoardState;

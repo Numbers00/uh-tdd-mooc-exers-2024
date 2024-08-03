@@ -84,7 +84,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("will wall kick when rotating left will make it go out of bounds", () => {
+  test("will wall kick when rotating left will make it go out of bounds", () => {
     board.rotateEntityLeft();
     moveToEdgeLeft(board);
     fallToBottom(board);
