@@ -314,14 +314,14 @@ export class Board {
     }
 
     let newBoardState = this._overwriteBoardState(this.boardState, newLatestEntity);
-    if (iter && this._checkNewBoardWillOverlap(newBoardState)) {
-      this.moveEntityLeft();
-      return;
-    } else if (
-      this._checkNewBoardWillOverlap(newBoardState)
-    ) {
-      this.moveEntityRight();
-      this.rotateEntityLeft({ iter: 1 });
+    if (this._checkNewBoardWillOverlap(newBoardState)) {
+      if (iter) {
+        this.moveEntityLeft();
+      } else {
+        this.moveEntityRight();
+        this.rotateEntityLeft({ iter: 1 });
+      }
+
       return;
     }
 
@@ -329,7 +329,7 @@ export class Board {
     this.boardState = newBoardState;
   }
 
-  rotateEntityRight() {
+  rotateEntityRight({ iter = 0 } = {}) {
     if (this.latestEntity.tetromino === null || this.latestEntity.hasFallen) return;
 
     const tetrominoRotatedRight = this.latestEntity.tetromino.rotateRight();
