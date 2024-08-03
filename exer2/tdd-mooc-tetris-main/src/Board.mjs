@@ -359,7 +359,7 @@ export class Board {
         this.moveEntityRight();
       } else {
         this.moveEntityLeft();
-        this.rotateEntityRight();
+        this.rotateEntityRight({ iter: 1 });
       }
       return;
     }
