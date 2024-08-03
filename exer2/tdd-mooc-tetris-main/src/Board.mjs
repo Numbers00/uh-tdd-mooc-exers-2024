@@ -345,7 +345,10 @@ export class Board {
 
     if (
       this._checkNewLatestEntityWillExceedBoardWidth(newLatestEntity)
-    ) return;
+    ) {
+      newLatestEntity.allPos.x = newLatestEntity.allPos.x.map(v => v - 1);
+      newLatestEntity.occupiedPos.x = newLatestEntity.occupiedPos.x.map(v => v - 1);
+    };
 
     let newBoardState = this._overwriteBoardState(this.boardState, newLatestEntity);
 
