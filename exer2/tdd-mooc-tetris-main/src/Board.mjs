@@ -355,8 +355,12 @@ export class Board {
     if (
       this._checkNewBoardWillOverlap(newBoardState)
     ) {
-      this.moveEntityLeft();
-      this.rotateEntityRight();
+      if (iter) {
+        this.moveEntityRight();
+      } else {
+        this.moveEntityLeft();
+        this.rotateEntityRight();
+      }
       return;
     }
 
