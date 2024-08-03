@@ -85,6 +85,20 @@ describe("Falling tetrominoes", () => {
   })
 
   test("will wall kick when rotating left will make it go out of bounds", () => {
+    board.rotateEntityRight();
+    moveToEdgeLeft(board);
+    board.rotateEntityLeft();
+    expect(board.toString()).to.equalShape(
+      `.T........
+       TTT.......
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  })
+
+  test("will wall kick when rotating left will make it overlap with other blocks", () => {
     board.rotateEntityLeft();
     moveToEdgeLeft(board);
     fallToBottom(board);
@@ -102,20 +116,6 @@ describe("Falling tetrominoes", () => {
        .TTTT.....
        TT........
        .T........`
-    );
-  })
-
-  test("will wall kick when rotating left will make it overlap with other blocks", () => {
-    board.rotateEntityRight();
-    moveToEdgeLeft(board);
-    board.rotateEntityLeft();
-    expect(board.toString()).to.equalShape(
-      `.T........
-       TTT.......
-       ..........
-       ..........
-       ..........
-       ..........`
     );
   })
 
