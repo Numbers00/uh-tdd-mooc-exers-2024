@@ -178,7 +178,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("will wall kick when rotating right will make it overlap with other blocks", () => {
+  test("will wall kick when rotating right will make it overlap with other blocks", () => {
     board.rotateEntityRight();
     moveToEdgeRight(board);
     fallToBottom(board);

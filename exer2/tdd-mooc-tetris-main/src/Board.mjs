@@ -354,7 +354,11 @@ export class Board {
 
     if (
       this._checkNewBoardWillOverlap(newBoardState)
-    ) return;
+    ) {
+      this.moveEntityLeft();
+      this.rotateEntityRight();
+      return;
+    }
 
     this.latestEntity = { ...newLatestEntity };
     this.boardState = newBoardState;
