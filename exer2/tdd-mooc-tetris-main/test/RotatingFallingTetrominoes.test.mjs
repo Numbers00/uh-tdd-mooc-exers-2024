@@ -177,4 +177,25 @@ describe("Falling tetrominoes", () => {
        ..........`
     );
   })
+
+  test.skip("will wall kick when rotating right will make it overlap with other blocks", () => {
+    board.rotateEntityRight();
+    moveToEdgeRight(board);
+    fallToBottom(board);
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateEntityLeft();
+    board.moveEntityRight();
+    board.moveEntityRight();
+    board.tick();
+    board.tick();
+    board.rotateEntityRight();
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ......T...
+       .....TTTT.
+       ........TT
+       ........T.`
+    );
+  })
 });
