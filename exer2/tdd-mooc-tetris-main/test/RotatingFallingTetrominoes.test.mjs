@@ -163,4 +163,18 @@ describe("Falling tetrominoes", () => {
        T.........`
     );
   })
+
+  test("will wall kick when rotating right will make it go out of bounds", () => {
+    board.rotateEntityLeft();
+    moveToEdgeRight(board);
+    board.rotateEntityRight();
+    expect(board.toString()).to.equalShape(
+      `........T.
+       .......TTT
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  })
 });
