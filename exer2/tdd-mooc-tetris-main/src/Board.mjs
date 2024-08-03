@@ -94,7 +94,6 @@ export class Board {
     let newBoardState = boardState.map(r => [...r]);
     let newLatestEntity = { ...latestEntity }; 
 
-    let willOverlap = false;
     for (let i = 0; i < newLatestEntity.shape.length; i++) {
       for (let j = 0; j < newLatestEntity.shape[0].length; j++) {
         const boardX = newLatestEntity.allPos.y[0] + i;
@@ -106,7 +105,6 @@ export class Board {
                 return false;
               const cellHasOccupant = entity.shape[Math.abs(entity.allPos.y[0] - boardX)][Math.abs(entity.allPos.x[0] - boardY)] !== ".";
               if (cellHasOccupant && newLatestEntity.shape[i][j] !== ".") {
-                willOverlap = true;
                 return true;
               }
             }
@@ -114,7 +112,6 @@ export class Board {
         newBoardState[newLatestEntity.allPos.y[i]][newLatestEntity.allPos.x[j]] = newLatestEntity.shape[i][j];
       }
     }
-    // if (willOverlap) return boardState;
     return newBoardState;
   }
 
